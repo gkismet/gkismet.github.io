@@ -5,5 +5,5 @@
 
 ## Download Link
 ![img](https://guolingzhi.github.io/icon/48_s.png)	
-### Cake Land 2 蛋糕乐消除2	
+### 配对动物-经典的匹配益智游戏
 Download on [[Google play]](https://play.google.com/store/apps/details?id=com.block.match3d.puzzlegame) [[App Store]](https://apps.apple.com/app/id1610846682)
