@@ -1,0 +1,10 @@
+{
+    "app_name": "My App",
+    "version": "1.0.0",
+    "api_url": "https://api.example.com",
+    "features": {
+        "feature1": true,
+        "feature2": false,
+        "feature3": true
+    }
+}
