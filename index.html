@@ -3802,6 +3802,34 @@
     });
 
     initGames();
+    // Track Freecash Reward Button Clicks via GA4
+    function setupFreecashTracking() {
+      const bannerBtn = document.getElementById('freecash-banner-link');
+      const navBtn = document.getElementById('freecash-nav-link');
+
+      function trackClick(position) {
+        if (typeof gtag === 'function') {
+          gtag('event', 'click_freecash_reward', {
+            event_category: 'affiliate',
+            event_label: position,
+            destination: 'https://freecash.com/r/377QCT'
+          });
+        }
+      }
+
+      if (bannerBtn) {
+        bannerBtn.addEventListener('click', function() {
+          trackClick('top_banner');
+        });
+      }
+      if (navBtn) {
+        navBtn.addEventListener('click', function() {
+          trackClick('nav_bar');
+        });
+      }
+    }
+    setupFreecashTracking();
+
   </script>
 </body>
 </html>
