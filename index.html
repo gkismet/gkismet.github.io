@@ -1587,7 +1587,7 @@
       <!-- VidoGo Editor's Choice Spotlight Card with Poster Preview -->
       <div class="vidogo-spotlight-card" id="vidogo-spotlight">
         <!-- Left: High-Converting 16:9 Video Poster -->
-        <a href="https://play.google.com/store/apps/details?id=com.video.master.Fast.HD.pro" target="_blank" rel="noopener noreferrer" class="spotlight-poster-wrap" title="Tap to Play & Unlock 4K Video">
+        <a href="https://play.google.com/store/apps/details?id=com.video.master.Fast.HD.pro&referrer=utm_source%3Dlab_gkismet%26utm_medium%3Dhome_spotlight%26utm_campaign%3Dvidogo_promo" target="_blank" rel="noopener noreferrer" class="spotlight-poster-wrap" title="Tap to Play & Unlock 4K Video">
           <img src="img/spicy_bikini.jpg" alt="VidoGo 4K VIP Video Preview" class="spotlight-poster-img">
           <div class="spotlight-poster-overlay">
             <span class="poster-badge-hot">🔥 18+ VIP UNCENSORED</span>
@@ -1628,7 +1628,7 @@
 
         <!-- Right: CTAs -->
         <div class="spotlight-right">
-          <a href="https://play.google.com/store/apps/details?id=com.video.master.Fast.HD.pro" target="_blank" rel="noopener noreferrer" class="btn-spotlight-gp" id="spotlight-play-cta">
+          <a href="https://play.google.com/store/apps/details?id=com.video.master.Fast.HD.pro&referrer=utm_source%3Dlab_gkismet%26utm_medium%3Dhome_spotlight%26utm_campaign%3Dvidogo_promo" target="_blank" rel="noopener noreferrer" class="btn-spotlight-gp" id="spotlight-play-cta">
             <svg style="width:24px; height:24px;" viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a2.38 2.38 0 0 1-.61-.924V2.738c.137-.367.348-.688.61-.924zm11.246 11.248l2.585 2.585-11.83 6.83 9.245-9.415zm0-2.124L5.61 1.523l11.83 6.83-2.585 2.585zm1.414 1.062l3.418 1.973c1.07.618 1.07 1.63 0 2.247l-3.418 1.973-2.464-2.464 2.464-2.464z"/></svg>
             <div style="display:flex; flex-direction:column; text-align:left;">
               <span style="font-size:10px; text-transform:uppercase; letter-spacing:0.06em; color:#fecdd3; font-weight:700;">FREE INSTALL ON</span>
@@ -4227,5 +4227,25 @@
 
 
   </script>
+  <!-- GA4 VidoGo Download Click Tracking -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var vLinks = document.querySelectorAll('#vidogo-spotlight a[href*="play.google.com"]');
+      vLinks.forEach(function(link) {
+        link.addEventListener('click', function() {
+          if (typeof gtag === 'function') {
+            gtag('event', 'download_click', {
+              'event_category': 'App Install Conversion',
+              'app_name': 'VidoGo',
+              'source_page': 'homepage_spotlight',
+              'button_id': link.id || link.className || 'home_spotlight_cta',
+              'destination_url': link.href
+            });
+          }
+        });
+      });
+    });
+  </script>
+
 </body>
 </html>
