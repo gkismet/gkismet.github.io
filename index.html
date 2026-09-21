@@ -72,6 +72,25 @@
       }
     },
     {
+          {
+      "@type": "MobileApplication",
+      "@id": "https://gkismet.github.io/#app-vidogo",
+      "name": "VidoGo - Video Downloader",
+      "operatingSystem": "Android",
+      "applicationCategory": "UtilitiesApplication",
+      "genre": "Tools / Video",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "downloadUrl": "https://play.google.com/store/apps/details?id=com.video.master.Fast.HD.pro",
+      "image": "https://lab.gkismet.com/img/vidogo_icon.png",
+      "author": {
+        "@id": "https://gkismet.github.io/#organization"
+      }
+    },
+    {
       "@type": "MobileApplication",
       "@id": "https://gkismet.github.io/#app-merge-2048",
       "name": "Merge Puzzle 2048",
@@ -1198,6 +1217,199 @@
       margin-left: 8px;
     }
 
+  
+    /* VidoGo Spotlight Card Styles */
+    .vidogo-spotlight-card {
+      background: linear-gradient(135deg, rgba(26, 34, 60, 0.95), rgba(13, 18, 33, 0.98));
+      border: 1px solid rgba(99, 102, 241, 0.4);
+      border-radius: 20px;
+      padding: 32px 36px;
+      margin-bottom: 36px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.6), 0 0 35px rgba(99, 102, 241, 0.18);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .vidogo-spotlight-card:hover {
+      border-color: rgba(99, 102, 241, 0.7);
+      box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.7), 0 0 45px rgba(99, 102, 241, 0.3);
+      transform: translateY(-2px);
+    }
+    .vidogo-spotlight-card::before {
+      content: '';
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.25), transparent 70%);
+      pointer-events: none;
+    }
+    .spotlight-left {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex: 1;
+    }
+    .spotlight-icon-wrap {
+      position: relative;
+      flex-shrink: 0;
+    }
+    .spotlight-icon {
+      width: 84px;
+      height: 84px;
+      border-radius: 18px;
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.4);
+      object-fit: cover;
+      display: block;
+    }
+    .spotlight-badge-corner {
+      position: absolute;
+      bottom: -6px;
+      right: -6px;
+      background: #10b981;
+      color: #fff;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 999px;
+      border: 2px solid #0d1221;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .spotlight-details {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .spotlight-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid rgba(99, 102, 241, 0.35);
+      color: #a5b4fc;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 999px;
+      width: fit-content;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .spotlight-title-row {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .spotlight-title {
+      font-size: 24px;
+      font-weight: 800;
+      color: #ffffff;
+      font-family: 'Outfit', sans-serif;
+      margin: 0;
+      line-height: 1.2;
+    }
+    .spotlight-rating {
+      color: #fbbf24;
+      font-size: 13px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .spotlight-desc {
+      font-size: 14px;
+      color: #94a3b8;
+      line-height: 1.55;
+      max-width: 620px;
+      margin: 2px 0 6px;
+    }
+    .spotlight-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .spotlight-tag {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #cbd5e1;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 9px;
+      border-radius: 6px;
+    }
+    .spotlight-right {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex-shrink: 0;
+      align-items: flex-end;
+    }
+    .btn-spotlight-gp {
+      background: #000000;
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 12px;
+      padding: 10px 18px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
+      transition: all 0.25s ease;
+    }
+    .btn-spotlight-gp:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.6);
+      box-shadow: 0 6px 24px rgba(99, 102, 241, 0.4);
+    }
+    .btn-spotlight-landing {
+      color: #a5b4fc;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+    .btn-spotlight-landing:hover {
+      color: #ffffff;
+      background: rgba(99, 102, 241, 0.15);
+    }
+    @media (max-width: 900px) {
+      .vidogo-spotlight-card {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 24px;
+        gap: 20px;
+      }
+      .spotlight-left {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+      .spotlight-right {
+        width: 100%;
+        align-items: stretch;
+      }
+      .btn-spotlight-gp {
+        justify-content: center;
+      }
+      .btn-spotlight-landing {
+        justify-content: center;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -1237,6 +1449,7 @@
 
       <nav class="nav-links">
         <a href="#featured" class="nav-link">Featured</a>
+        <a href="vidogo/" class="nav-link" style="color: #a5b4fc; font-weight: 700; display: inline-flex; align-items: center; gap: 4px;"><span style="font-size: 13px;">⚡</span> VidoGo App</a>
         <a href="#matrix" class="nav-link">Game Library</a>
         <a href="#faq" class="nav-link">FAQ</a>
         <a href="PrivacyPolicy.txt" class="nav-link" target="_blank">Privacy</a>
@@ -1317,6 +1530,53 @@
         <div>
           <h2 class="section-title">Featured Hits</h2>
           <p class="section-subtitle">Our most popular puzzle & casual game titles</p>
+        </div>
+      </div>
+
+      
+      <!-- VidoGo Editor's Choice Spotlight Card -->
+      <div class="vidogo-spotlight-card" id="vidogo-spotlight">
+        <div class="spotlight-left">
+          <div class="spotlight-icon-wrap">
+            <img src="img/vidogo_icon.png" alt="VidoGo Video Downloader" class="spotlight-icon">
+            <span class="spotlight-badge-corner">HOT</span>
+          </div>
+          <div class="spotlight-details">
+            <div class="spotlight-pill">
+              <span>⭐</span>
+              Editor's Choice • Featured Utility
+            </div>
+            <div class="spotlight-title-row">
+              <h3 class="spotlight-title">VidoGo – Fast HD Video Downloader</h3>
+              <div class="spotlight-rating">
+                <span>★ 4.8</span>
+                <span style="color:#94a3b8; font-weight:400; font-size:11px;">(12.8K+ reviews)</span>
+              </div>
+            </div>
+            <p class="spotlight-desc">
+              Supercharge your media collection. Auto-detect video streams from any website, download in 1080p/2K/4K with multi-threaded turbo speed, and keep sensitive videos safe in an encrypted private vault.
+            </p>
+            <div class="spotlight-tags">
+              <span class="spotlight-tag">⚡ 300% Fast Acceleration</span>
+              <span class="spotlight-tag">🔒 Encrypted Private Vault</span>
+              <span class="spotlight-tag">🔍 Auto-Sniff Detection</span>
+              <span class="spotlight-tag">🎬 Built-in HD Player</span>
+              <span class="spotlight-tag">100% Free</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="spotlight-right">
+          <a href="https://play.google.com/store/apps/details?id=com.video.master.Fast.HD.pro" target="_blank" rel="noopener noreferrer" class="btn-spotlight-gp" id="spotlight-play-cta">
+            <svg style="width:24px; height:24px;" viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a2.38 2.38 0 0 1-.61-.924V2.738c.137-.367.348-.688.61-.924zm11.246 11.248l2.585 2.585-11.83 6.83 9.245-9.415zm0-2.124L5.61 1.523l11.83 6.83-2.585 2.585zm1.414 1.062l3.418 1.973c1.07.618 1.07 1.63 0 2.247l-3.418 1.973-2.464-2.464 2.464-2.464z"/></svg>
+            <div style="display:flex; flex-direction:column; text-align:left;">
+              <span style="font-size:10px; text-transform:uppercase; letter-spacing:0.06em; color:#cbd5e1; font-weight:600;">GET IT ON</span>
+              <span style="font-size:16px; font-weight:800; font-family:'Outfit',sans-serif; color:#ffffff; line-height:1.1;">Google Play</span>
+            </div>
+          </a>
+          <a href="vidogo/" class="btn-spotlight-landing">
+            Explore Features & Guide →
+          </a>
         </div>
       </div>
 
