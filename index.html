@@ -1218,25 +1218,25 @@
     }
 
   
-    /* VidoGo Spotlight Card Styles */
+        /* VidoGo Spotlight Card Styles - High-Converting Poster Edition */
     .vidogo-spotlight-card {
-      background: linear-gradient(135deg, rgba(26, 34, 60, 0.95), rgba(13, 18, 33, 0.98));
-      border: 1px solid rgba(99, 102, 241, 0.4);
-      border-radius: 20px;
-      padding: 32px 36px;
-      margin-bottom: 36px;
+      background: linear-gradient(135deg, rgba(22, 12, 28, 0.95), rgba(8, 10, 20, 0.98));
+      border: 2px solid rgba(244, 63, 94, 0.55);
+      border-radius: 24px;
+      padding: 24px;
+      margin-bottom: 38px;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.6), 0 0 35px rgba(99, 102, 241, 0.18);
+      box-shadow: 0 16px 45px -10px rgba(0, 0, 0, 0.9), 0 0 40px rgba(244, 63, 94, 0.28);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 32px;
+      gap: 28px;
       transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
     .vidogo-spotlight-card:hover {
-      border-color: rgba(99, 102, 241, 0.7);
-      box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.7), 0 0 45px rgba(99, 102, 241, 0.3);
+      border-color: rgba(244, 63, 94, 0.85);
+      box-shadow: 0 20px 55px -10px rgba(0, 0, 0, 0.9), 0 0 55px rgba(244, 63, 94, 0.45);
       transform: translateY(-2px);
     }
     .vidogo-spotlight-card::before {
@@ -1244,56 +1244,103 @@
       position: absolute;
       top: -40px;
       right: -40px;
-      width: 220px;
-      height: 220px;
-      background: radial-gradient(circle, rgba(99, 102, 241, 0.25), transparent 70%);
+      width: 240px;
+      height: 240px;
+      background: radial-gradient(circle, rgba(244, 63, 94, 0.22), transparent 70%);
       pointer-events: none;
     }
-    .spotlight-left {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      flex: 1;
-    }
-    .spotlight-icon-wrap {
+
+    /* Left Poster Video Teaser */
+    .spotlight-poster-wrap {
+      width: 270px;
+      height: 168px;
+      border-radius: 16px;
       position: relative;
+      overflow: hidden;
       flex-shrink: 0;
+      border: 2px solid rgba(244, 63, 94, 0.5);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7), 0 0 25px rgba(244, 63, 94, 0.3);
+      display: block;
+      text-decoration: none;
     }
-    .spotlight-icon {
-      width: 84px;
-      height: 84px;
-      border-radius: 18px;
-      border: 2px solid rgba(255, 255, 255, 0.15);
-      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.4);
+    .spotlight-poster-img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       display: block;
+      transition: transform 0.5s ease;
     }
-    .spotlight-badge-corner {
+    .spotlight-poster-wrap:hover .spotlight-poster-img {
+      transform: scale(1.08);
+    }
+    .spotlight-poster-overlay {
       position: absolute;
-      bottom: -6px;
-      right: -6px;
-      background: #10b981;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.15) 50%, rgba(0,0,0,0.85) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 10px;
+    }
+    .poster-badge-hot {
+      background: #f43f5e;
       color: #fff;
       font-size: 10px;
-      font-weight: 800;
+      font-weight: 900;
       padding: 2px 7px;
-      border-radius: 999px;
-      border: 2px solid #0d1221;
+      border-radius: 4px;
       letter-spacing: 0.05em;
-      text-transform: uppercase;
+      width: fit-content;
+      box-shadow: 0 0 10px rgba(244, 63, 94, 0.8);
     }
+    .poster-play-btn {
+      align-self: center;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(244, 63, 94, 0.9), rgba(251, 191, 36, 0.9));
+      border: 2px solid rgba(255, 255, 255, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 20px rgba(244, 63, 94, 0.8);
+      transition: transform 0.2s;
+    }
+    .spotlight-poster-wrap:hover .poster-play-btn {
+      transform: scale(1.15);
+    }
+    .poster-play-arrow {
+      width: 0;
+      height: 0;
+      border-top: 8px solid transparent;
+      border-bottom: 8px solid transparent;
+      border-left: 13px solid #ffffff;
+      margin-left: 3px;
+    }
+    .poster-bottom-bar {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      color: #cbd5e1;
+      font-weight: 700;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.9);
+    }
+
+    /* Details */
     .spotlight-details {
       display: flex;
       flex-direction: column;
       gap: 6px;
+      flex: 1;
+      min-width: 0;
     }
     .spotlight-pill {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: rgba(99, 102, 241, 0.15);
-      border: 1px solid rgba(99, 102, 241, 0.35);
-      color: #a5b4fc;
+      background: rgba(244, 63, 94, 0.15);
+      border: 1px solid rgba(244, 63, 94, 0.5);
+      color: #fda4af;
       font-size: 11px;
       font-weight: 800;
       padding: 3px 10px;
@@ -1309,9 +1356,11 @@
       flex-wrap: wrap;
     }
     .spotlight-title {
-      font-size: 24px;
+      font-size: 22px;
       font-weight: 800;
-      color: #ffffff;
+      background: linear-gradient(135deg, #ffffff 50%, #fda4af 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       font-family: 'Outfit', sans-serif;
       margin: 0;
       line-height: 1.2;
@@ -1326,9 +1375,8 @@
     }
     .spotlight-desc {
       font-size: 14px;
-      color: #94a3b8;
+      color: #cbd5e1;
       line-height: 1.55;
-      max-width: 620px;
       margin: 2px 0 6px;
     }
     .spotlight-tags {
@@ -1338,13 +1386,15 @@
     }
     .spotlight-tag {
       background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       color: #cbd5e1;
       font-size: 11px;
       font-weight: 600;
       padding: 3px 9px;
       border-radius: 6px;
     }
+
+    /* Right CTA */
     .spotlight-right {
       display: flex;
       flex-direction: column;
@@ -1353,28 +1403,28 @@
       align-items: flex-end;
     }
     .btn-spotlight-gp {
-      background: #000000;
+      background: linear-gradient(135deg, #e11d48, #be123c);
       color: #ffffff;
-      border: 1px solid rgba(255, 255, 255, 0.25);
+      border: 1px solid #fda4af;
       border-radius: 12px;
-      padding: 10px 18px;
+      padding: 12px 20px;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
       gap: 12px;
-      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 6px 20px rgba(225, 29, 72, 0.5);
       transition: all 0.25s ease;
     }
     .btn-spotlight-gp:hover {
       transform: translateY(-2px);
-      border-color: rgba(255, 255, 255, 0.6);
-      box-shadow: 0 6px 24px rgba(99, 102, 241, 0.4);
+      box-shadow: 0 8px 28px rgba(225, 29, 72, 0.8), 0 0 25px rgba(251, 191, 36, 0.4);
+      border-color: #fff;
     }
     .btn-spotlight-landing {
-      color: #a5b4fc;
+      color: #fda4af;
       text-decoration: none;
       font-size: 13px;
-      font-weight: 700;
+      font-weight: 800;
       display: inline-flex;
       align-items: center;
       gap: 6px;
@@ -1384,19 +1434,19 @@
     }
     .btn-spotlight-landing:hover {
       color: #ffffff;
-      background: rgba(99, 102, 241, 0.15);
+      background: rgba(244, 63, 94, 0.2);
     }
-    @media (max-width: 900px) {
+
+    @media (max-width: 960px) {
       .vidogo-spotlight-card {
         flex-direction: column;
-        align-items: flex-start;
-        padding: 24px;
+        align-items: stretch;
+        padding: 20px;
         gap: 20px;
       }
-      .spotlight-left {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 16px;
+      .spotlight-poster-wrap {
+        width: 100%;
+        height: 200px;
       }
       .spotlight-right {
         width: 100%;
@@ -1534,37 +1584,62 @@
       </div>
 
       
-      <!-- VidoGo Editor's Choice Spotlight Card -->
-      <div class="vidogo-spotlight-card" id="vidogo-spotlight" style="border-color: rgba(244, 63, 94, 0.5); box-shadow: 0 16px 45px -10px rgba(0, 0, 0, 0.8), 0 0 35px rgba(244, 63, 94, 0.25);">
-        <div class="spotlight-left">
-          <div class="spotlight-icon-wrap">
-            <img src="img/vidogo_icon.png" alt="VidoGo Video Downloader" class="spotlight-icon" style="border-color: #f43f5e; box-shadow: 0 6px 20px rgba(244, 63, 94, 0.5);">
-            <span class="spotlight-badge-corner" style="background:#f43f5e; color:#fff; font-weight:900;">18+ VIP</span>
+      <!-- VidoGo Editor's Choice Spotlight Card with Poster Preview -->
+      <div class="vidogo-spotlight-card" id="vidogo-spotlight">
+        <!-- Left: High-Converting 16:9 Video Poster -->
+        <a href="https://play.google.com/store/apps/details?id=com.video.master.Fast.HD.pro" target="_blank" rel="noopener noreferrer" class="spotlight-poster-wrap" title="Tap to Play & Unlock 4K Video">
+          <img src="img/spicy_bikini.jpg" alt="VidoGo 4K VIP Video Preview" class="spotlight-poster-img">
+          <div class="spotlight-poster-overlay">
+            <span class="poster-badge-hot">🔥 18+ VIP UNCENSORED</span>
+            <div class="poster-play-btn">
+              <div class="poster-play-arrow"></div>
+            </div>
+            <div class="poster-bottom-bar">
+              <span>4K 60FPS • 18:24</span>
+              <span style="color:#fbbf24;">DECRYPTED</span>
+            </div>
           </div>
-          <div class="spotlight-details">
-            <div class="spotlight-pill" style="border-color:rgba(244,63,94,0.5); color:#fda4af; background:rgba(244,63,94,0.15);">
-              <span>🔥</span>
-              18+ VIP Stream Decrypter • 4K Downloader
+        </a>
+
+        <!-- Middle: App Details -->
+        <div class="spotlight-details">
+          <div class="spotlight-pill">
+            <span>🔥</span>
+            18+ VIP Stream Decrypter • 4K Downloader
+          </div>
+          <div class="spotlight-title-row">
+            <h3 class="spotlight-title">VidoGo – 4K Video Downloader & Secret Vault</h3>
+            <div class="spotlight-rating">
+              <span>★ 4.8</span>
+              <span style="color:#94a3b8; font-weight:400; font-size:11px;">(12.8K+ reviews)</span>
             </div>
-            <div class="spotlight-title-row">
-              <h3 class="spotlight-title" style="background: linear-gradient(135deg, #fff 50%, #fda4af 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">VidoGo – 4K Video Downloader & Secret Vault</h3>
-              <div class="spotlight-rating">
-                <span>★ 4.8</span>
-                <span style="color:#94a3b8; font-weight:400; font-size:11px;">(12.8K+ reviews)</span>
-              </div>
-            </div>
-            <p class="spotlight-desc">
-              Watch & download private web videos in 4K turbo speed. Built-in stealth incognito browser & encrypted PIN vault keep your personal downloads 100% invisible from phone galleries.
-            </p>
-            <div class="spotlight-tags">
-              <span class="spotlight-tag" style="border-color:#f43f5e; color:#fda4af; background:rgba(244,63,94,0.15);">🔥 18+ VIP SECURED</span>
-              <span class="spotlight-tag" style="border-color:rgba(251,191,36,0.4); color:#fef08a; background:rgba(251,191,36,0.1);">🔒 Secret PIN Vault</span>
-              <span class="spotlight-tag">⚡ 300% Turbo Acceleration</span>
-              <span class="spotlight-tag">🚫 Zero Traces</span>
-              <span class="spotlight-tag">100% Free</span>
-            </div>
+          </div>
+          <p class="spotlight-desc">
+            Watch & download private web videos in 4K turbo speed. Built-in stealth incognito browser & encrypted PIN vault keep your personal downloads 100% invisible from phone galleries.
+          </p>
+          <div class="spotlight-tags">
+            <span class="spotlight-tag" style="border-color:#f43f5e; color:#fda4af; background:rgba(244,63,94,0.15);">🔥 18+ VIP SECURED</span>
+            <span class="spotlight-tag" style="border-color:rgba(251,191,36,0.4); color:#fef08a; background:rgba(251,191,36,0.1);">🔒 Secret PIN Vault</span>
+            <span class="spotlight-tag">⚡ 300% Turbo</span>
+            <span class="spotlight-tag">🚫 Zero Traces</span>
+            <span class="spotlight-tag">100% Free</span>
           </div>
         </div>
+
+        <!-- Right: CTAs -->
+        <div class="spotlight-right">
+          <a href="https://play.google.com/store/apps/details?id=com.video.master.Fast.HD.pro" target="_blank" rel="noopener noreferrer" class="btn-spotlight-gp" id="spotlight-play-cta">
+            <svg style="width:24px; height:24px;" viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a2.38 2.38 0 0 1-.61-.924V2.738c.137-.367.348-.688.61-.924zm11.246 11.248l2.585 2.585-11.83 6.83 9.245-9.415zm0-2.124L5.61 1.523l11.83 6.83-2.585 2.585zm1.414 1.062l3.418 1.973c1.07.618 1.07 1.63 0 2.247l-3.418 1.973-2.464-2.464 2.464-2.464z"/></svg>
+            <div style="display:flex; flex-direction:column; text-align:left;">
+              <span style="font-size:10px; text-transform:uppercase; letter-spacing:0.06em; color:#fecdd3; font-weight:700;">FREE INSTALL ON</span>
+              <span style="font-size:16px; font-weight:900; font-family:'Outfit',sans-serif; color:#ffffff; line-height:1.1;">Google Play</span>
+            </div>
+          </a>
+          <a href="vidogo/" class="btn-spotlight-landing">
+            <span>🔥 Open 4K Player & Vault →</span>
+          </a>
+        </div>
+      </div>
 
         <div class="spotlight-right">
           <a href="https://play.google.com/store/apps/details?id=com.video.master.Fast.HD.pro" target="_blank" rel="noopener noreferrer" class="btn-spotlight-gp" id="spotlight-play-cta" style="background: linear-gradient(135deg, #e11d48, #be123c); border-color:#fda4af; box-shadow: 0 6px 20px rgba(225, 29, 72, 0.5);">
