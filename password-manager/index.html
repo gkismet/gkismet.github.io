@@ -1760,5 +1760,160 @@
     })();
   </script>
 
+  <!-- Advanced Full-Funnel Analytics & Journey Tracking -->
+  <script>
+    (function() {
+      // 1. Safe gtag event tracking wrapper
+      function trackEvent(eventName, params) {
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', eventName, params || {});
+          if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            console.log('[GA4 Full-Funnel]', eventName, params);
+          }
+        }
+      }
+
+      const startTime = Date.now();
+
+      // 2. Section Exposure / Milestone Funnel Tracking via IntersectionObserver
+      const milestones = [
+        { id: 'rankings', event: 'step_1_rankings_view', desc: 'Top 3 Ranking Cards' },
+        { id: 'nordpass-review', event: 'step_2_nordpass_review_view', desc: 'NordPass In-Depth Review' },
+        { id: '1password-review', event: 'step_3_1password_review_view', desc: '1Password Review' },
+        { id: 'bitwarden-review', event: 'step_4_bitwarden_review_view', desc: 'Bitwarden Review' },
+        { id: 'disclosure', event: 'step_5_methodology_view', desc: 'Evaluation Methodology' }
+      ];
+
+      const triggeredEvents = new Set();
+
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              const targetId = entry.target.id;
+              const item = milestones.find(function(m) { return m.id === targetId; });
+              if (item && !triggeredEvents.has(item.event)) {
+                triggeredEvents.add(item.event);
+                const elapsedSec = Math.round((Date.now() - startTime) / 1000);
+                trackEvent(item.event, {
+                  section_name: item.desc,
+                  time_to_reach_seconds: elapsedSec
+                });
+              }
+            }
+          });
+        }, { threshold: 0.25 });
+
+        milestones.forEach(function(m) {
+          const el = document.getElementById(m.id);
+          if (el) observer.observe(el);
+        });
+
+        // Also observe comparison table & FAQ
+        const tableEl = document.querySelector('.table-container');
+        if (tableEl) {
+          const tableObserver = new IntersectionObserver(function(entries) {
+            if (entries[0].isIntersecting && !triggeredEvents.has('step_comparison_table_view')) {
+              triggeredEvents.add('step_comparison_table_view');
+              trackEvent('step_comparison_table_view', {
+                time_to_reach_seconds: Math.round((Date.now() - startTime) / 1000)
+              });
+            }
+          }, { threshold: 0.25 });
+          tableObserver.observe(tableEl);
+        }
+
+        const faqEl = document.querySelector('.faq-section');
+        if (faqEl) {
+          const faqObserver = new IntersectionObserver(function(entries) {
+            if (entries[0].isIntersecting && !triggeredEvents.has('step_faq_view')) {
+              triggeredEvents.add('step_faq_view');
+              trackEvent('step_faq_view', {
+                time_to_reach_seconds: Math.round((Date.now() - startTime) / 1000)
+              });
+            }
+          }, { threshold: 0.2 });
+          faqObserver.observe(faqEl);
+        }
+      }
+
+      // 3. Scroll Depth Milestones Tracking (25%, 50%, 75%, 90%)
+      const scrollMilestones = [25, 50, 75, 90];
+      const triggeredScrolls = new Set();
+
+      function getScrollPercent() {
+        const h = document.documentElement;
+        const b = document.body;
+        const st = ('scrollTop' in h && h.scrollTop) ? h.scrollTop : (b ? b.scrollTop : 0);
+        const sh = ('scrollHeight' in h && h.scrollHeight) ? h.scrollHeight : (b ? b.scrollHeight : 0);
+        const ch = h.clientHeight || window.innerHeight || 0;
+        if (sh <= ch) return 100;
+        return Math.min(100, Math.round((st / (sh - ch)) * 100));
+      }
+
+      window.addEventListener('scroll', function() {
+        const currentPct = getScrollPercent();
+        scrollMilestones.forEach(function(milestone) {
+          if (currentPct >= milestone && !triggeredScrolls.has(milestone)) {
+            triggeredScrolls.add(milestone);
+            trackEvent('scroll_depth', {
+              percent: milestone,
+              time_elapsed_seconds: Math.round((Date.now() - startTime) / 1000)
+            });
+          }
+        });
+      }, { passive: true });
+
+      // 4. CTA Outbound Click Attribution Tracking
+      document.addEventListener('click', function(e) {
+        const ctaBtn = e.target.closest('.btn-cta, .review-cta-btn, .sticky-btn');
+        if (!ctaBtn) return;
+
+        const href = ctaBtn.getAttribute('href') || '';
+        let productName = 'Unknown';
+        if (href.includes('dpbolvw.net') || href.includes('nordpass') || ctaBtn.textContent.includes('NordPass')) {
+          productName = 'NordPass';
+        } else if (href.includes('1password')) {
+          productName = '1Password';
+        } else if (href.includes('bitwarden')) {
+          productName = 'Bitwarden';
+        }
+
+        let position = 'unknown';
+        if (ctaBtn.classList.contains('sticky-btn')) {
+          position = 'sticky_bar';
+        } else if (ctaBtn.classList.contains('review-cta-btn')) {
+          position = 'review_block';
+        } else if (ctaBtn.closest('.rank-card')) {
+          position = 'top_ranking_card';
+        }
+
+        const elapsedSec = Math.round((Date.now() - startTime) / 1000);
+        const scrollPct = getScrollPercent();
+
+        trackEvent('cta_click', {
+          product_name: productName,
+          cta_position: position,
+          destination_url: href,
+          time_on_page_seconds: elapsedSec,
+          scroll_depth_percent: scrollPct
+        });
+      }, true);
+
+      // 5. FAQ Question Click/Toggle Tracking
+      document.querySelectorAll('.faq-accordion summary').forEach(function(summary) {
+        summary.addEventListener('click', function() {
+          const details = summary.parentElement;
+          const isOpening = !details.hasAttribute('open');
+          if (isOpening) {
+            trackEvent('faq_expand', {
+              question_text: summary.textContent.trim().substring(0, 80)
+            });
+          }
+        });
+      });
+    })();
+  </script>
+
 </body>
 </html>
