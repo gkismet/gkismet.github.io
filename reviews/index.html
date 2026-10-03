@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) / Firebase GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6YG5RJMF2M"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6YG5RJMF2M');
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CyberGuard Labs: Independent Product Reviews, Benchmarks & Buyer Guides</title>
+  <meta name="description" content="Independent laboratory benchmark testing, hands-on product reviews, and consumer buyer guides covering smart home pet gear, cybersecurity software, and household equipment.">
+  <link rel="canonical" href="https://lab.gkismet.com/reviews/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="CyberGuard Labs">
+  <meta property="og:title" content="CyberGuard Labs: Independent Product Reviews & Benchmarks">
+  <meta property="og:description" content="Hands-on product teardowns, safety testing, and independent benchmark ratings.">
+  <meta property="og:url" content="https://lab.gkismet.com/reviews/">
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --accent: #10b981;
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --radius: 12px;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-inner {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 800;
+      text-decoration: none;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-badge {
+      background: #eff6ff;
+      color: var(--primary);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .hero {
+      background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 60px 24px 48px;
+      text-align: center;
+    }
+
+    .hero-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--primary);
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      margin-bottom: 16px;
+      color: #0f172a;
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .main-container {
+      max-width: 1140px;
+      margin: 48px auto;
+      padding: 0 24px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #0f172a;
+    }
+
+    /* Grid of Reviews */
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 28px;
+    }
+
+    .review-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow);
+      transition: all 0.25s ease;
+      position: relative;
+    }
+
+    .review-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+      border-color: #cbd5e1;
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .cat-pill {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 4px 10px;
+      border-radius: 9999px;
+    }
+
+    .cat-pet { background: #ecfdf5; color: #047857; }
+    .cat-cyber { background: #eff6ff; color: #1d4ed8; }
+    .cat-home { background: #fef3c7; color: #b45309; }
+    .cat-hobby { background: #f3e8ff; color: #7e22ce; }
+
+    .score-badge {
+      font-size: 0.9rem;
+      font-weight: 800;
+      background: #10b981;
+      color: white;
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      line-height: 1.35;
+      margin-bottom: 12px;
+      color: #0f172a;
+    }
+
+    .card-title a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .card-title a:hover {
+      color: var(--primary);
+    }
+
+    .card-desc {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+      margin-bottom: 24px;
+      flex-grow: 1;
+    }
+
+    .card-highlights {
+      list-style: none;
+      font-size: 0.85rem;
+      color: #334155;
+      margin-bottom: 20px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+
+    .card-highlights li {
+      margin-bottom: 6px;
+      padding-left: 18px;
+      position: relative;
+    }
+
+    .card-highlights li::before {
+      content: "✓";
+      color: #10b981;
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+    }
+
+    .btn-view {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      background: var(--surface);
+      color: var(--primary);
+      border: 1.5px solid var(--primary);
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-view:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    footer {
+      background: #ffffff;
+      border-top: 1px solid var(--border);
+      padding: 40px 24px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 80px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header>
+    <div class="nav-inner">
+      <a href="https://lab.gkismet.com/reviews/" class="logo">
+        <span>CyberGuard <strong>Labs</strong></span>
+        <span class="logo-badge">Independent Reviews</span>
+      </a>
+      <span style="font-size: 0.85rem; color: var(--text-muted);">Verified Consumer Benchmarks 2026</span>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-container">
+      <span class="hero-tag">🔬 Rigorous Hands-On Teardowns</span>
+      <h1>Consumer Tech & Home Benchmarks</h1>
+      <p>We purchase, disassemble, and stress-test consumer products over 30 to 90 days. Honest ratings, side-by-side data tables, and zero sponsored bias.</p>
+    </div>
+  </section>
+
+  <!-- Content Grid -->
+  <main class="main-container">
+    <div class="section-header">
+      <h2 class="section-title">Latest Lab Benchmarks & Ratings</h2>
+    </div>
+
+    <div class="reviews-grid">
+
+      <!-- PETKIT PURA MAX -->
+      <article class="review-card">
+        <div class="card-top">
+          <span class="cat-pill cat-pet">Smart Pet Tech</span>
+          <span class="score-badge">9.4 / 10</span>
+        </div>
+        <h3 class="card-title">
+          <a href="https://lab.gkismet.com/petkit-pura-max-review/">PETKIT PURA MAX Self-Cleaning Litter Box Review (2026)</a>
+        </h3>
+        <p class="card-desc">
+          90-day multi-cat odor suppression test, xSecure 11-sensor pinch safety teardown, and head-to-head comparison against the Litter-Robot 4.
+        </p>
+        <ul class="card-highlights">
+          <li>xSecure 11-sensor array (zero pinch incidents)</li>
+          <li>7.8-inch low step-in height for senior cats</li>
+          <li>Saves $200+ over competing flagship units</li>
+        </ul>
+        <a href="https://lab.gkismet.com/petkit-pura-max-review/" class="btn-view">Read Full Lab Review →</a>
+      </article>
+
+      <!-- Best VPN 2026 -->
+      <article class="review-card">
+        <div class="card-top">
+          <span class="cat-pill cat-cyber">Cybersecurity</span>
+          <span class="score-badge">9.8 / 10</span>
+        </div>
+        <h3 class="card-title">
+          <a href="https://lab.gkismet.com/best-vpn-2026/">Top 3 Best VPN Services of 2026: Lab Tested & Rated</a>
+        </h3>
+        <p class="card-desc">
+          10Gbps WireGuard protocol throughput benchmarking, independent Deloitte zero-logs audit evaluations, and 4K streaming unblocking resilience.
+        </p>
+        <ul class="card-highlights">
+          <li>94.2% WireGuard baseline throughput retention</li>
+          <li>Verified zero-knowledge RAM-only server nodes</li>
+          <li>Top pick: NordVPN & Surfshark comparison</li>
+        </ul>
+        <a href="https://lab.gkismet.com/best-vpn-2026/" class="btn-view">Read Full Lab Review →</a>
+      </article>
+
+      <!-- Best Password Manager 2026 -->
+      <article class="review-card">
+        <div class="card-top">
+          <span class="cat-pill cat-cyber">Software</span>
+          <span class="score-badge">9.6 / 10</span>
+        </div>
+        <h3 class="card-title">
+          <a href="https://lab.gkismet.com/best-password-manager-2026/">Top 3 Best Password Managers of 2026: Security Audit</a>
+        </h3>
+        <p class="card-desc">
+          XChaCha20 vs AES-256 cryptographic resilience testing, passkey cross-device synchronization benchmarks, and autofill reliability tests.
+        </p>
+        <ul class="card-highlights">
+          <li>99.4% complex form autofill accuracy</li>
+          <li>Native biometric passkey sync across OS</li>
+          <li>Independent zero-knowledge architecture</li>
+        </ul>
+        <a href="https://lab.gkismet.com/best-password-manager-2026/" class="btn-view">Read Full Lab Review →</a>
+      </article>
+
+      <!-- Abelssoft Utilities -->
+      <article class="review-card">
+        <div class="card-top">
+          <span class="cat-pill cat-cyber">Windows Utilities</span>
+          <span class="score-badge">9.2 / 10</span>
+        </div>
+        <h3 class="card-title">
+          <a href="https://lab.gkismet.com/abelssoft/">Abelssoft Windows Utilities Suite Review (2026)</a>
+        </h3>
+        <p class="card-desc">
+          Hands-on benchmark testing of PC Fresh, CheckDrive, and YouTube Song Downloader. Cold boot times reduced by 38.4% on Windows 11.
+        </p>
+        <ul class="card-highlights">
+          <li>Reclaimed 14.2 GB junk files in stress test</li>
+          <li>100% clean and verified virus-free</li>
+          <li>Lifetime license value proposition</li>
+        </ul>
+        <a href="https://lab.gkismet.com/abelssoft/" class="btn-view">Read Full Lab Review →</a>
+      </article>
+
+      <!-- Trampoline Replacement Parts -->
+      <article class="review-card">
+        <div class="card-top">
+          <span class="cat-pill cat-home">Backyard & Sports</span>
+          <span class="score-badge">9.5 / 10</span>
+        </div>
+        <h3 class="card-title">
+          <a href="https://lab.gkismet.com/trampoline/">Trampoline Replacement Parts & Heavy-Duty Mats (2026)</a>
+        </h3>
+        <p class="card-desc">
+          ASTM F381-16 safety-certified jumping mats, 8-row perimeter V-ring stitching stress test, and universal fit replacement pads.
+        </p>
+        <ul class="card-highlights">
+          <li>450 lbs tensile load capacity verification</li>
+          <li>5-year anti-UV weatherproof fabric warranty</li>
+          <li>Universal fit for Skywalker and major brands</li>
+        </ul>
+        <a href="https://lab.gkismet.com/trampoline/" class="btn-view">Read Full Lab Review →</a>
+      </article>
+
+      <!-- Diecast Wholesale Models -->
+      <article class="review-card">
+        <div class="card-top">
+          <span class="cat-pill cat-hobby">Collectibles</span>
+          <span class="score-badge">9.3 / 10</span>
+        </div>
+        <h3 class="card-title">
+          <a href="https://lab.gkismet.com/diecast/">Diecast Models Wholesale Buyer Guide (2026)</a>
+        </h3>
+        <p class="card-desc">
+          Collector-grade scale model review (1:18, 1:24, 1:64). Manufacturer authenticity verification, zinc-alloy casting evaluation, and shipping safety.
+        </p>
+        <ul class="card-highlights">
+          <li>Official licensed replicas (Autoart, Norev, Maisto)</li>
+          <li>Museum-quality precision interior detailing</li>
+          <li>Wholesale bulk pricing and collector discounts</li>
+        </ul>
+        <a href="https://lab.gkismet.com/diecast/" class="btn-view">Read Full Lab Review →</a>
+      </article>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2026 CyberGuard Labs. Independent Consumer & Technology Benchmarks. All rights reserved.</p>
+    <p style="margin-top: 8px; font-size: 0.8rem;">We independently evaluate products through rigorous laboratory testing. When you purchase through our links, we may earn an affiliate commission.</p>
+  </footer>
+
+</body>
+</html>
