@@ -33,4 +33,4 @@ User-agent: Amazonbot
 Allow: /
 
 # Sitemap definition
-Sitemap: https://gkismet.github.io/sitemap.xml
+Sitemap: https://lab.gkismet.com/sitemap.xml
