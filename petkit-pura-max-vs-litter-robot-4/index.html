@@ -388,6 +388,66 @@
       padding-top: 24px;
       border-top: 1px solid var(--border);
     }
+
+    /* Mobile Sticky CTA Bar */
+    .sticky-cta-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(15, 23, 42, 0.96);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.28);
+      z-index: 9999;
+      padding: 12px 16px;
+    }
+    .sticky-cta-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .sticky-cta-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .sticky-cta-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.01em;
+    }
+    .sticky-cta-sub {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+    .sticky-cta-btn {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: #ffffff;
+      font-size: 0.9rem;
+      font-weight: 800;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      white-space: nowrap;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .sticky-cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
+    }
+    @media (max-width: 480px) {
+      .sticky-cta-title { font-size: 0.88rem; }
+      .sticky-cta-sub { font-size: 0.74rem; }
+      .sticky-cta-btn { padding: 9px 14px; font-size: 0.82rem; }
+    }
   </style>
 </head>
 <body>
@@ -568,6 +628,19 @@
 <footer>
   <p>© 2026 CyberGuard Labs. Independent Consumer & Technology Benchmarks. All rights reserved.</p>
 </footer>
+
+<!-- Persistent Mobile Sticky Conversion Bar -->
+<aside class="sticky-cta-bar" aria-label="Exclusive Deal">
+  <div class="sticky-cta-inner">
+    <div class="sticky-cta-info">
+      <div class="sticky-cta-title">🏆 PETKIT PURA MAX</div>
+      <div class="sticky-cta-sub">34.8 dB Silent • Save $200 vs LR4</div>
+    </div>
+    <a href="https://www.anrdoezrs.net/links/101878805/type/dlg/https://petkit.com/products/pura-max" target="_blank" rel="nofollow noopener sponsored" class="sticky-cta-btn">
+      Claim $499 Deal →
+    </a>
+  </div>
+</aside>
 
 </body>
 </html>
