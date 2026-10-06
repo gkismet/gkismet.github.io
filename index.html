@@ -76,7 +76,6 @@
       }
     },
     {
-          {
       "@type": "MobileApplication",
       "@id": "https://gkismet.github.io/#app-vidogo",
       "name": "VidoGo - Video Downloader",
@@ -249,7 +248,15 @@
 
     html {
       scroll-behavior: smooth;
+      overflow-x: hidden;
+      max-width: 100vw;
+      width: 100%;
     }
+
+    body {
+      overflow-x: hidden;
+      max-width: 100vw;
+      width: 100%;
 
     body {
       background-color: var(--bg-main);
@@ -385,6 +392,91 @@
       width: 16px;
       height: 16px;
     }
+
+    .nav-link-reviews {
+      color: #34d399 !important;
+      font-weight: 700 !important;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .nav-link-vidogo {
+      color: #a5b4fc !important;
+      font-weight: 700 !important;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .mobile-nav-toggle-wrap {
+      display: none;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .mobile-quick-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      color: #34d399;
+      padding: 6px 11px;
+      border-radius: var(--radius-full);
+      font-size: 0.76rem;
+      font-weight: 700;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .mobile-quick-btn:hover {
+      background: rgba(16, 185, 129, 0.25);
+    }
+
+    .mobile-menu-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      cursor: pointer;
+      padding: 0;
+      transition: all 0.25s;
+    }
+
+    .mobile-menu-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .hamburger-line {
+      width: 20px;
+      height: 2px;
+      background: #f8fafc;
+      border-radius: 2px;
+      transition: all 0.25s ease;
+      display: block;
+    }
+
+    .mobile-menu-btn.active .hamburger-line:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .mobile-menu-btn.active .hamburger-line:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+
+    .mobile-menu-btn.active .hamburger-line:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
 
     /* Hero Section */
     .hero-section {
@@ -1040,20 +1132,406 @@
       transform: translateY(-3px);
     }
 
-    /* Responsive */
+    /* ========================================================
+       Comprehensive Mobile & Responsive System
+       ======================================================== */
     @media (max-width: 768px) {
-      .footer-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
+      /* Global Safety */
+      html, body {
+        overflow-x: hidden !important;
+        width: 100% !important;
+        max-width: 100vw !important;
       }
-      .hero-title {
-        font-size: 2.2rem;
+
+      .container {
+        padding: 0 16px;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+      }
+
+      /* Top Announcement Banner */
+      .top-rewards-banner {
+        padding: 8px 0;
+        width: 100%;
+        overflow: hidden;
+      }
+      .banner-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 8px;
+        padding: 0 12px;
+      }
+      .banner-left {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 5px;
+        width: 100%;
+      }
+      .banner-badge {
+        font-size: 0.72rem;
+        padding: 2px 8px;
+      }
+      .banner-text {
+        font-size: 0.8rem;
+        line-height: 1.35;
+        word-break: break-word;
+      }
+      .banner-btn {
+        width: auto;
+        min-width: 140px;
+        max-width: 200px;
+        justify-content: center;
+        padding: 5px 14px;
+        font-size: 0.78rem;
+      }
+
+      /* Header & Mobile Navigation */
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        width: 100%;
+      }
+      .nav-wrapper {
+        height: 60px;
+        padding: 0;
+      }
+      .logo-area {
+        gap: 10px;
+      }
+      .logo-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+      }
+      .logo-icon svg {
+        width: 20px;
+        height: 20px;
+      }
+      .brand-title {
+        font-size: 1.08rem;
+      }
+      .brand-tagline {
+        font-size: 0.62rem;
+      }
+
+      .mobile-nav-toggle-wrap {
+        display: flex;
+      }
+
+      /* Slide-down / Overlay Drawer on Mobile */
+      .nav-links {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: calc(100vh - 60px);
+        background: rgba(10, 13, 22, 0.98);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        flex-direction: column;
+        align-items: stretch;
+        padding: 20px 18px 36px;
+        gap: 10px;
+        overflow-y: auto;
+        border-top: 1px solid var(--border-subtle);
+        transform: translateY(-100%);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+        z-index: 999;
+      }
+      .nav-links.active {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
       }
       .nav-links .nav-link {
+        display: flex !important;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 13px 16px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        border-radius: var(--radius-md);
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid var(--border-subtle);
+        color: var(--text-primary);
+        text-align: left;
+      }
+      .nav-links .nav-link:hover,
+      .nav-links .nav-link:active {
+        background: rgba(255, 255, 255, 0.09);
+        border-color: rgba(255, 255, 255, 0.2);
+        color: #ffffff;
+      }
+      .nav-links .nav-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 8px;
+        padding-top: 14px;
+        border-top: 1px solid var(--border-subtle);
+      }
+      .nav-links .btn-badge {
+        width: 100%;
+        justify-content: center;
+        padding: 12px 16px;
+        font-size: 0.88rem;
+      }
+
+      /* Hero Section */
+      .hero-section {
+        padding: 34px 0 28px;
+        overflow: hidden;
+      }
+      .hero-pill {
+        font-size: 0.74rem;
+        padding: 5px 12px;
+        max-width: 100%;
+        white-space: normal;
+        margin-bottom: 16px;
+        text-align: center;
+      }
+      .hero-title {
+        font-size: clamp(1.8rem, 6.5vw, 2.35rem);
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+        margin-bottom: 14px;
+        word-break: break-word;
+      }
+      .hero-subtitle {
+        font-size: 0.9rem;
+        line-height: 1.5;
+        margin-bottom: 24px;
+        padding: 0 4px;
+      }
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+        max-width: 310px;
+        margin: 0 auto 30px;
+        gap: 10px;
+      }
+      .btn-store {
+        width: 100%;
+        justify-content: center;
+        padding: 12px 16px;
+        font-size: 0.88rem;
+        box-sizing: border-box;
+      }
+      .hero-stats {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px 10px;
+        max-width: 320px;
+        margin: 0 auto;
+        padding-top: 18px;
+      }
+      .stat-value {
+        font-size: 1.45rem;
+      }
+      .stat-label {
+        font-size: 0.7rem;
+      }
+
+      /* Featured Showcase */
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        margin-bottom: 18px;
+      }
+      .section-title {
+        font-size: 1.4rem;
+      }
+      .section-subtitle {
+        font-size: 0.84rem;
+      }
+      .featured-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        margin-bottom: 34px;
+      }
+      .featured-card {
+        padding: 16px;
+      }
+      .featured-img {
+        width: 60px;
+        height: 60px;
+      }
+      .featured-name {
+        font-size: 1.05rem;
+      }
+
+      /* Spotlight Card */
+      .vidogo-spotlight-card {
+        padding: 16px;
+        gap: 16px;
+        border-radius: 16px;
+      }
+      .spotlight-poster-wrap {
+        height: 180px;
+        border-radius: 12px;
+      }
+      .spotlight-title {
+        font-size: 1.25rem;
+      }
+      .spotlight-desc {
+        font-size: 0.86rem;
+      }
+      .btn-spotlight-gp {
+        width: 100%;
+        justify-content: center;
+        padding: 11px 16px;
+        font-size: 0.9rem;
+      }
+      .btn-spotlight-landing {
+        width: 100%;
+        justify-content: center;
+      }
+
+      /* Game Matrix Controls */
+      .matrix-controls {
+        padding: 14px;
+        gap: 12px;
+        margin-bottom: 20px;
+        border-radius: 14px;
+      }
+      .controls-top {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+      }
+      .search-box {
+        min-width: 0;
+        width: 100%;
+      }
+      .search-input {
+        padding: 10px 14px 10px 38px;
+        font-size: 0.88rem;
+      }
+      .count-indicator {
+        text-align: right;
+        font-size: 0.8rem;
+      }
+      .filter-pills {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        gap: 6px;
+        padding-bottom: 4px;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+      .filter-pills::-webkit-scrollbar {
         display: none;
       }
+      .pill-btn {
+        flex-shrink: 0;
+        white-space: nowrap;
+        padding: 6px 12px;
+        font-size: 0.78rem;
+      }
+
+      /* Game Grid - 2 columns on mobile */
       .game-grid {
-        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        margin-bottom: 36px;
+      }
+      .game-card {
+        padding: 12px 10px;
+      }
+      .game-card-header {
+        gap: 10px;
+        margin-bottom: 8px;
+      }
+      .game-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
+      }
+      .game-name {
+        font-size: 0.82rem;
+      }
+      .game-category {
+        font-size: 0.65rem;
+      }
+      .game-pkg {
+        display: none;
+      }
+      .btn-play-store {
+        padding: 6px 8px;
+        font-size: 0.72rem;
+      }
+
+      /* FAQ Section */
+      .faq-section {
+        padding: 30px 0 50px;
+      }
+      .faq-question {
+        padding: 14px 16px;
+        font-size: 0.92rem;
+      }
+      .faq-answer {
+        padding: 0 16px 14px;
+        font-size: 0.85rem;
+      }
+
+      /* Footer */
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        margin-bottom: 24px;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+      }
+
+      /* Back to top button */
+      .back-to-top {
+        bottom: 16px;
+        right: 16px;
+        width: 38px;
+        height: 38px;
+      }
+    }
+
+    /* Small mobile screens (<= 380px) */
+    @media (max-width: 380px) {
+      .container {
+        padding: 0 10px;
+      }
+      .game-grid {
+        gap: 8px;
+      }
+      .game-card {
+        padding: 10px 8px;
+      }
+      .game-icon {
+        width: 38px;
+        height: 38px;
+      }
+      .game-name {
+        font-size: 0.78rem;
+      }
+      .hero-title {
+        font-size: 1.65rem;
+      }
+      .brand-title {
+        font-size: 0.98rem;
+      }
+      .mobile-quick-btn {
+        padding: 5px 8px;
+        font-size: 0.72rem;
       }
     }
   
@@ -1150,28 +1628,7 @@
       background: rgba(234, 179, 8, 0.2) !important;
       box-shadow: 0 0 12px rgba(250, 204, 21, 0.3) !important;
     }
-    @media (max-width: 768px) {
-      .top-rewards-banner {
-        padding: 8px 0;
-      }
-      .banner-container {
-        justify-content: center;
-        text-align: center;
-        gap: 8px;
-      }
-      .banner-left {
-        flex-direction: column;
-        gap: 4px;
-      }
-      .banner-text {
-        font-size: 0.82rem;
-      }
-      .banner-btn {
-        width: 100%;
-        justify-content: center;
-        padding: 6px 12px;
-      }
-    }
+
 
   
     /* YouTube Integration */
@@ -1501,10 +1958,10 @@
         </div>
       </div>
 
-      <nav class="nav-links">
-        <a href="reviews/" class="nav-link" style="color: #34d399; font-weight: 700; display: inline-flex; align-items: center; gap: 4px;">🔬 Lab Reviews</a>
-          <a href="#featured" class="nav-link">Featured</a>
-        <a href="vidogo/" class="nav-link" style="color: #a5b4fc; font-weight: 700; display: inline-flex; align-items: center; gap: 4px;"><span style="font-size: 13px;">⚡</span> VidoGo App</a>
+      <nav class="nav-links" id="main-nav">
+        <a href="reviews/" class="nav-link nav-link-reviews">🔬 Lab Reviews</a>
+        <a href="#featured" class="nav-link">Featured</a>
+        <a href="vidogo/" class="nav-link nav-link-vidogo"><span class="badge-icon">⚡</span> VidoGo App</a>
         <a href="#matrix" class="nav-link">Game Library</a>
         <a href="#faq" class="nav-link">FAQ</a>
         <a href="PrivacyPolicy.txt" class="nav-link" target="_blank">Privacy</a>
@@ -1524,6 +1981,18 @@
           </a>
         </div>
       </nav>
+
+      <div class="mobile-nav-toggle-wrap">
+        <a href="https://play.google.com/store/apps/dev?id=5233851887688172838" target="_blank" class="mobile-quick-btn" title="Google Play Store">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M3.609 1.814L13.792 12 3.61 22.186a2.38 2.38 0 0 1-.61-.924V2.738c.137-.367.348-.688.61-.924zm11.246 11.248l2.585 2.585-11.83 6.83 9.245-9.415zm0-2.124L5.61 1.523l11.83 6.83-2.585 2.585zm1.414 1.062l3.418 1.973c1.07.618 1.07 1.63 0 2.247l-3.418 1.973-2.464-2.464 2.464-2.464z"/></svg>
+          <span>Store</span>
+        </a>
+        <button class="mobile-menu-btn" id="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -4250,6 +4719,47 @@
         });
       });
     });
+  </script>
+
+
+  <!-- Mobile Navigation Drawer Handler -->
+  <script>
+    (function() {
+      var menuToggle = document.getElementById('mobile-menu-toggle');
+      var navLinks = document.getElementById('main-nav');
+      if (menuToggle && navLinks) {
+        function toggleMenu(open) {
+          var isOpen = typeof open === 'boolean' ? open : !navLinks.classList.contains('active');
+          navLinks.classList.toggle('active', isOpen);
+          menuToggle.classList.toggle('active', isOpen);
+          menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+          document.body.style.overflow = isOpen ? 'hidden' : '';
+        }
+
+        menuToggle.addEventListener('click', function(e) {
+          e.stopPropagation();
+          toggleMenu();
+        });
+
+        navLinks.querySelectorAll('a').forEach(function(a) {
+          a.addEventListener('click', function() {
+            toggleMenu(false);
+          });
+        });
+
+        document.addEventListener('click', function(e) {
+          if (navLinks.classList.contains('active') && !navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
+            toggleMenu(false);
+          }
+        });
+
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+            toggleMenu(false);
+          }
+        });
+      }
+    })();
   </script>
 
 </body>
