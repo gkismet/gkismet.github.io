@@ -43,6 +43,19 @@ This repository also serves as the static CDN server for our in-game cross-promo
 
 ---
 
+## 🔬 CyberGuard Labs — Independent Technology & Consumer Benchmarks
+In addition to mobile gaming, our engineering group hosts **[CyberGuard Labs (lab.gkismet.com)](https://lab.gkismet.com/)**, conducting independent hardware stress-tests, acoustic noise measurements, and cryptographic software security audits:
+
+- **[Verified Deals & Coupons Hub (2026)](https://lab.gkismet.com/deals/)**: Real-time verified promotional codes, direct manufacturer discounts, and active warranties on smart pet tech, VPNs, and home automation.
+- **[SwitchBot Smart Home & Pet Cam Teardown](https://lab.gkismet.com/switchbot/)**: 25 dB QuietDrift curtain motor benchmarks, Matter bridge teardowns, and verified discount codes.
+- **[Top 3 Best Self-Cleaning Cat Litter Boxes of 2026](https://lab.gkismet.com/best-self-cleaning-litter-box-2026/)**: 1,500-cycle multi-cat laboratory evaluation comparing PETKIT PURA MAX, Whisker Litter-Robot 4, and Neakasa M1.
+- **[PETKIT PURA MAX vs Litter-Robot 4: Head-to-Head](https://lab.gkismet.com/petkit-pura-max-vs-litter-robot-4/)**: 35 dB vs 45 dB noise analysis and 11-sensor xSecure pinch-protection teardown.
+- **[Surfshark vs NordVPN 10Gbps WireGuard Teardown](https://lab.gkismet.com/surfshark-vs-nordvpn/)**: Real-world throughput speeds, Deloitte zero-logs audit evaluations, and streaming unblocking.
+- **[NordPass vs 1Password Security Teardown](https://lab.gkismet.com/nordpass-vs-1password/)**: Modern XChaCha20 zero-knowledge encryption analysis, biometric passkey sync, and autofill accuracy.
+
+---
+
 ## 📬 Contact Us
 For business partnerships, game publishing, or user feedback:
 - **Email**: [classicgamepuzzle2020@gmail.com](mailto:classicgamepuzzle2020@gmail.com)
+
