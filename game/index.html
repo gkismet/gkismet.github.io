@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Testing Portal | Interactive Playtest</title>
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <!-- Meta fallback refresh for no-JS environments -->
+    <meta http-equiv="refresh" content="2; url=https://ldl1.com/link?z=12026947&var=mailpulse">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-base: #090d16;
+            --card-bg: rgba(17, 24, 39, 0.75);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --primary: #3b82f6;
+            --primary-glow: rgba(59, 130, 246, 0.35);
+            --accent: #10b981;
+            --text-main: #f9fafb;
+            --text-muted: #9ca3af;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            background-image: 
+                radial-gradient(circle at 50% 20%, rgba(59, 130, 246, 0.15), transparent 45%),
+                radial-gradient(circle at 80% 80%, rgba(16, 185, 129, 0.08), transparent 40%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: var(--text-main);
+        }
+
+        .portal-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 20px;
+            padding: 40px 32px;
+            max-width: 440px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 40px -10px var(--primary-glow);
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .icon-container {
+            position: relative;
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .spinner-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px solid rgba(59, 130, 246, 0.15);
+            border-top-color: var(--primary);
+            animation: spin 1s cubic-bezier(0.55, 0.15, 0.45, 0.85) infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .game-badge {
+            font-size: 28px;
+            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4));
+        }
+
+        h1 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+        }
+
+        p.desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-bottom: 24px;
+        }
+
+        .progress-container {
+            background: rgba(255, 255, 255, 0.06);
+            height: 6px;
+            border-radius: 999px;
+            overflow: hidden;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 15%;
+            background: linear-gradient(90deg, #3b82f6, #60a5fa, #10b981);
+            border-radius: 999px;
+            transition: width 0.4s ease;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            color: #94a3b8;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 8px var(--accent);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.85); }
+        }
+
+        .action-link {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: #60a5fa;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            opacity: 0.85;
+        }
+
+        .action-link:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        .secure-footer {
+            margin-top: 24px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-size: 0.75rem;
+            color: #6b7280;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="portal-card">
+        <div class="icon-container">
+            <div class="spinner-ring"></div>
+            <div class="game-badge">🎮</div>
+        </div>
+
+        <h1>Launching Game Demo</h1>
+        <p class="desc">Preparing your personalized playtest build. Connecting to server...</p>
+
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <div class="status-badge">
+            <span class="status-dot"></span>
+            <span id="statusLabel">Verifying device compatibility...</span>
+        </div>
+
+        <a id="directLink" class="action-link" href="https://ldl1.com/link?z=12026947">
+            Click here if you are not redirected automatically &rarr;
+        </a>
+
+        <div class="secure-footer">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            <span>Verified Secure Playtest Gateway &bull; Kismet Labs</span>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // Target Base URL
+            const BASE_URL = "https://ldl1.com/link?z=12026947";
+            
+            // Extract query parameters from current window URL
+            const urlParams = new URLSearchParams(window.location.search);
+            
+            // Handle SOURCE_ID / var
+            const sourceParam = urlParams.get("var") || urlParams.get("source_id") || urlParams.get("source") || "mailpulse";
+            
+            // Handle CLICK_ID / ymid
+            const clickParam = urlParams.get("ymid") || urlParams.get("click_id") || urlParams.get("cid") || ("clk_" + Date.now().toString(36) + Math.random().toString(36).substring(2, 6));
+            
+            // Build dynamic target URL
+            const target = new URL(BASE_URL);
+            target.searchParams.set("var", sourceParam);
+            target.searchParams.set("ymid", clickParam);
+            
+            // Forward any additional parameters (utm, subid, etc.)
+            urlParams.forEach((val, key) => {
+                const kLower = key.toLowerCase();
+                if (!["var", "source_id", "source", "ymid", "click_id", "cid", "z"].includes(kLower)) {
+                    target.searchParams.set(key, val);
+                }
+            });
+            
+            const finalDestination = target.toString();
+            
+            // Update fallback link immediately
+            const linkElem = document.getElementById("directLink");
+            if (linkElem) {
+                linkElem.href = finalDestination;
+            }
+
+            // Staged visual feedback before quick redirect
+            const progressBar = document.getElementById("progressBar");
+            const statusLabel = document.getElementById("statusLabel");
+
+            setTimeout(function() {
+                if (progressBar) progressBar.style.width = "65%";
+                if (statusLabel) statusLabel.textContent = "Loading game assets...";
+            }, 250);
+
+            setTimeout(function() {
+                if (progressBar) progressBar.style.width = "100%";
+                if (statusLabel) statusLabel.textContent = "Redirecting...";
+                // Primary modern redirect: replace state to keep history clean
+                window.location.replace(finalDestination);
+            }, 600);
+
+            // Hard fallback in case browser delays timers
+            setTimeout(function() {
+                window.location.href = finalDestination;
+            }, 1800);
+        })();
+    </script>
+</body>
+</html>
