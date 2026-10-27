@@ -1,0 +1,1852 @@
+<!DOCTYPE html>
+<html lang="en" id="top">
+<head>
+  <script>document.documentElement.classList.add('js')</script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6YG5RJMF2M"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6YG5RJMF2M');
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Play Instant Mini-Games Online | GuoLingZhi Web Arcade</title>
+  <meta name="description" content="Play free instant HTML5 puzzle games in your browser — no install needed. Enjoy Water Sort Puzzle, 2048 Merge Blocks, Block Blast 8x8, Bubble Shooter, and Mahjong Triple Match.">
+  <meta name="keywords" content="Instant Games, Play Online, Water Sort Web Game, 2048 Online, Block Puzzle HTML5, Bubble Shooter Web, Mahjong Triple Match, GuoLingZhi Network">
+  <link rel="canonical" href="https://lab.gkismet.com/play.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://lab.gkismet.com/play.html">
+  <meta property="og:site_name" content="GuoLingZhi Web Arcade">
+  <meta property="og:title" content="Play Instant Mini-Games Online | No Install Needed">
+  <meta property="og:description" content="Play Water Sort, 2048 Merge, Block Blast, Bubble Pop & Mahjong Match directly in your browser and earn arcade coins.">
+  <meta property="og:image" content="https://lab.gkismet.com/img/43_s.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@700&amp;family=Source+Serif+4:ital,wght@0,400;0,600;1,400;1,600&amp;display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #191919;
+      --surface: #242424;
+      --surface-high: #2f2f2f;
+      --ink: #ffffff;
+      --muted: #cfcfcf;
+      --field-1: #9e1111;
+      --field-1-ink: #ffffff;
+      --field-2: #123196;
+      --field-2-ink: #ffffff;
+      --field-3: #075245;
+      --field-3-ink: #ffffff;
+      --field-4: #ffe927;
+      --field-4-ink: #111111;
+
+      --font-display: 'Libre Franklin', sans-serif;
+      --font-text: 'Source Serif 4', Georgia, serif;
+
+      --step-small: 0.875rem;
+      --step-body: 1.0625rem;
+      --step-lead: 1.25rem;
+      --step-head: clamp(1.75rem, 1.2rem + 2.2vw, 2.75rem);
+      --step-display: clamp(2.4rem, 6vw, 4.75rem);
+
+      --margin: clamp(1rem, 2.8vw, 2.5rem);
+      --gutter: clamp(0.875rem, 1.8vw, 1.5rem);
+      --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+      --t-press: 110ms;
+      --t-hover: 160ms;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      background-color: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-text);
+      font-size: 16px;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    img, svg, canvas {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button, input, select {
+      font: inherit;
+      color: inherit;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    h1, h2, h3, .display-type {
+      font-family: var(--font-display);
+      font-weight: 700;
+      text-wrap: balance;
+    }
+
+    .tabular {
+      font-variant-numeric: tabular-nums;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1380px;
+      margin-inline: auto;
+      padding-inline: var(--margin);
+    }
+
+    .swiss-grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      column-gap: var(--gutter);
+      row-gap: var(--gutter);
+    }
+
+    /* Header */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      background-color: var(--field-2);
+      color: var(--field-2-ink);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 64px;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding-block: 8px;
+    }
+
+    .brand-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-display);
+      font-size: var(--step-body);
+      font-weight: 700;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      background-color: var(--field-4);
+      color: var(--field-4-ink);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: var(--step-small);
+    }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .coin-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 38px;
+      padding: 0 14px;
+      background-color: var(--bg);
+      color: var(--field-4);
+      font-family: var(--font-display);
+      font-size: var(--step-small);
+      font-weight: 700;
+    }
+
+    .lang-select {
+      min-height: 38px;
+      padding: 0 12px;
+      background-color: var(--surface);
+      color: var(--ink);
+      font-family: var(--font-display);
+      font-size: var(--step-small);
+      font-weight: 700;
+    }
+
+    .header-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 38px;
+      padding: 0 14px;
+      background-color: var(--field-4);
+      color: var(--field-4-ink);
+      font-family: var(--font-display);
+      font-size: var(--step-small);
+      font-weight: 700;
+      transition: transform var(--t-press) var(--ease-out);
+    }
+
+    .header-cta:active {
+      transform: scale(0.97);
+    }
+
+    /* Hero + Instant Game Stage */
+    .arcade-stage-section {
+      background-color: var(--bg);
+      padding-block: clamp(1.5rem, 3vw, 2.75rem);
+    }
+
+    .stage-top-bar {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .stage-headline {
+      font-size: var(--step-display);
+      line-height: 0.94;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+    }
+
+    .stage-headline span {
+      color: var(--field-4);
+    }
+
+    .stage-subtitle {
+      font-size: var(--step-lead);
+      color: var(--muted);
+      max-width: 56ch;
+      margin-top: 6px;
+    }
+
+    /* Game Switcher Tabs */
+    .game-tabs {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .game-tab-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      background-color: var(--surface);
+      color: var(--ink);
+      text-align: left;
+      transition: background-color var(--t-hover) ease, color var(--t-hover) ease, transform var(--t-press) var(--ease-out);
+    }
+
+    .game-tab-btn:active {
+      transform: scale(0.98);
+    }
+
+    .game-tab-btn.active {
+      background-color: var(--field-4);
+      color: var(--field-4-ink);
+    }
+
+    .game-tab-icon {
+      width: 44px;
+      height: 44px;
+      object-fit: cover;
+      flex-shrink: 0;
+      background-color: var(--bg);
+    }
+
+    .game-tab-info {
+      min-width: 0;
+    }
+
+    .game-tab-title {
+      font-family: var(--font-display);
+      font-size: var(--step-small);
+      font-weight: 700;
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .game-tab-tag {
+      font-size: var(--step-small);
+      opacity: 0.8;
+    }
+
+    /* Main Interactive Play Layout */
+    .play-workspace {
+      align-items: start;
+    }
+
+    .canvas-column {
+      grid-column: 1 / 9;
+      background-color: var(--surface);
+      padding: clamp(1rem, 2.2vw, 1.75rem);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .game-hud {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      background-color: var(--bg);
+      padding: 12px 16px;
+    }
+
+    .hud-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hud-game-name {
+      font-family: var(--font-display);
+      font-size: var(--step-lead);
+      font-weight: 700;
+      color: var(--field-4);
+    }
+
+    .hud-stats {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-family: var(--font-display);
+      font-size: var(--step-small);
+      font-weight: 700;
+    }
+
+    .hud-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .hud-btn {
+      min-height: 38px;
+      padding: 0 14px;
+      background-color: var(--surface-high);
+      color: var(--ink);
+      font-family: var(--font-display);
+      font-size: var(--step-small);
+      font-weight: 700;
+    }
+
+    .hud-btn.primary {
+      background-color: var(--field-4);
+      color: var(--field-4-ink);
+    }
+
+    /* Interactive Game Stage Container */
+    .game-stage-viewport {
+      min-height: 440px;
+      background-color: var(--bg);
+      padding: clamp(1rem, 2vw, 1.75rem);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      user-select: none;
+    }
+
+    .game-panel {
+      display: none;
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .game-panel.active {
+      display: flex;
+    }
+
+    .game-help-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      width: 100%;
+      background-color: var(--bg);
+      padding: 12px 16px;
+    }
+
+    .help-text {
+      font-size: var(--step-small);
+      color: var(--muted);
+    }
+
+    /* 1. Water Sort Game Styles */
+    .tubes-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: clamp(14px, 3vw, 26px);
+      padding-block: 16px;
+      min-height: 260px;
+      align-items: flex-end;
+    }
+
+    .water-tube {
+      width: 60px;
+      height: 188px;
+      background-color: var(--surface);
+      padding: 6px;
+      display: flex;
+      flex-direction: column-reverse;
+      justify-content: flex-start;
+      gap: 3px;
+      cursor: pointer;
+      transition: transform var(--t-press) var(--ease-out), background-color var(--t-hover) ease;
+    }
+
+    .water-tube.selected {
+      transform: translateY(-18px);
+      background-color: var(--field-4);
+    }
+
+    .water-layer {
+      width: 100%;
+      height: 41px;
+      transition: height 160ms var(--ease-out);
+    }
+
+    /* 2. 2048 Game Styles */
+    .board-2048-wrap {
+      width: 100%;
+      max-width: 340px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .board-2048 {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+      background-color: var(--surface);
+      padding: 8px;
+      aspect-ratio: 1 / 1;
+    }
+
+    .cell-2048 {
+      background-color: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .cell-2048[data-v="2"] { background-color: var(--surface-high); }
+    .cell-2048[data-v="4"] { background-color: #123196; color: #ffffff; }
+    .cell-2048[data-v="8"] { background-color: #075245; color: #ffffff; }
+    .cell-2048[data-v="16"] { background-color: #9e1111; color: #ffffff; }
+    .cell-2048[data-v="32"] { background-color: #ffe927; color: #111111; }
+    .cell-2048[data-v="64"] { background-color: #ffffff; color: #111111; }
+    .cell-2048[data-v="128"], .cell-2048[data-v="256"], .cell-2048[data-v="512"], .cell-2048[data-v="1024"], .cell-2048[data-v="2048"] {
+      background-color: var(--field-4);
+      color: var(--field-4-ink);
+    }
+
+    .dpad-row {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    /* 3. Block Blast 8x8 Styles */
+    .block-blast-layout {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      width: 100%;
+      max-width: 360px;
+    }
+
+    .grid-8x8 {
+      display: grid;
+      grid-template-columns: repeat(8, minmax(0, 1fr));
+      gap: 4px;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background-color: var(--surface);
+      padding: 6px;
+    }
+
+    .bb-cell {
+      background-color: var(--bg);
+      cursor: pointer;
+      transition: background-color 100ms ease;
+    }
+
+    .bb-dock {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      width: 100%;
+    }
+
+    .bb-piece-btn {
+      min-height: 76px;
+      background-color: var(--surface);
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .bb-piece-btn.selected {
+      background-color: var(--field-4);
+      color: var(--field-4-ink);
+    }
+
+    .mini-shape-grid {
+      display: grid;
+      gap: 2px;
+    }
+
+    .mini-shape-dot {
+      width: 12px;
+      height: 12px;
+    }
+
+    /* 4. Bubble Pop Blitz Styles */
+    .bubble-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      max-width: 380px;
+    }
+
+    .bubble-grid {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 6px;
+      width: 100%;
+      background-color: var(--surface);
+      padding: 10px;
+    }
+
+    .bubble-node {
+      aspect-ratio: 1 / 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: var(--step-small);
+      font-weight: 700;
+      transition: transform var(--t-press) var(--ease-out);
+    }
+
+    .bubble-node:active {
+      transform: scale(0.9);
+    }
+
+    /* 5. Mahjong Triple Match Styles */
+    .mahjong-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .mahjong-board {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 8px;
+      width: 100%;
+    }
+
+    .mj-tile {
+      min-height: 58px;
+      background-color: var(--surface);
+      color: var(--ink);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.25rem;
+      transition: transform var(--t-press) var(--ease-out), background-color var(--t-hover) ease;
+    }
+
+    .mj-tile:active {
+      transform: scale(0.95);
+    }
+
+    .mj-tile.cleared {
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .mj-tray {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 6px;
+      width: 100%;
+      background-color: var(--surface);
+      padding: 10px;
+      min-height: 68px;
+    }
+
+    .mj-slot {
+      background-color: var(--bg);
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.15rem;
+    }
+
+    /* Right Column: Rewards, Sponsored Slot & Instant App Download */
+    .sidebar-column {
+      grid-column: 9 / 13;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .promo-block {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .promo-yellow {
+      background-color: var(--field-4);
+      color: var(--field-4-ink);
+    }
+
+    .promo-teal {
+      background-color: var(--field-3);
+      color: var(--field-3-ink);
+    }
+
+    .promo-red {
+      background-color: var(--field-1);
+      color: var(--field-1-ink);
+    }
+
+    .promo-surface {
+      background-color: var(--surface);
+      color: var(--ink);
+    }
+
+    .promo-kicker {
+      font-family: var(--font-display);
+      font-size: var(--step-small);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .promo-title {
+      font-size: 1.35rem;
+      line-height: 1.15;
+    }
+
+    .promo-desc {
+      font-size: var(--step-small);
+      line-height: 1.45;
+    }
+
+    .promo-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 18px;
+      background-color: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-display);
+      font-size: var(--step-small);
+      font-weight: 700;
+      width: 100%;
+      text-align: center;
+      transition: transform var(--t-press) var(--ease-out);
+    }
+
+    .promo-btn.yellow {
+      background-color: var(--field-4);
+      color: var(--field-4-ink);
+    }
+
+    .promo-btn:active {
+      transform: scale(0.98);
+    }
+
+    .matched-app-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .matched-app-icon {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      background-color: var(--bg);
+      flex-shrink: 0;
+    }
+
+    /* Full 129+ Games Matrix Section */
+    .catalog-section {
+      background-color: var(--surface);
+      padding-block: clamp(3rem, 6vw, 5rem);
+    }
+
+    .catalog-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .catalog-controls {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .search-input {
+      flex: 1;
+      min-width: 240px;
+      min-height: 46px;
+      background-color: var(--bg);
+      color: var(--ink);
+      padding: 0 16px;
+      font-size: var(--step-body);
+    }
+
+    .filter-pill {
+      min-height: 42px;
+      padding: 0 14px;
+      background-color: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-display);
+      font-size: var(--step-small);
+      font-weight: 700;
+    }
+
+    .filter-pill.active {
+      background-color: var(--field-4);
+      color: var(--field-4-ink);
+    }
+
+    .catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      column-gap: var(--gutter);
+      row-gap: 24px;
+    }
+
+    .app-item {
+      grid-column: span 3;
+      background-color: var(--bg);
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .app-item-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .app-item-icon {
+      width: 56px;
+      height: 56px;
+      object-fit: cover;
+      flex-shrink: 0;
+      background-color: var(--surface);
+    }
+
+    .app-item-name {
+      font-family: var(--font-display);
+      font-size: var(--step-small);
+      font-weight: 700;
+      line-height: 1.25;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .app-item-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .app-action-link {
+      flex: 1;
+      min-height: 36px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: var(--step-small);
+      font-weight: 700;
+      background-color: var(--surface-high);
+      color: var(--ink);
+    }
+
+    .app-action-link.play-web {
+      background-color: var(--field-4);
+      color: var(--field-4-ink);
+    }
+
+    .site-footer {
+      background-color: var(--bg);
+      color: var(--muted);
+      padding-block: 36px;
+      font-size: var(--step-small);
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 1024px) {
+      .game-tabs {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      .canvas-column {
+        grid-column: 1 / 13;
+      }
+      .sidebar-column {
+        grid-column: 1 / 13;
+      }
+      .app-item {
+        grid-column: span 4;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .game-tabs {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .app-item {
+        grid-column: span 6;
+      }
+      .water-tube {
+        width: 52px;
+        height: 168px;
+      }
+      .water-layer {
+        height: 36px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Sticky Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand-link">
+        <span class="brand-mark">GLZ</span>
+        <span>GUOLINGZHI WEB ARCADE</span>
+      </a>
+      <div class="header-controls">
+        <div class="coin-badge tabular" title="Coins earned by clearing levels">
+          <span>COINS:</span>
+          <span id="coin-counter">100</span>
+        </div>
+        <select id="lang-switcher" class="lang-select" aria-label="Select Language">
+          <option value="en">English</option>
+          <option value="ar">العربية</option>
+          <option value="id">Indonesia</option>
+          <option value="es">Español</option>
+        </select>
+        <a href="#full-catalog" class="header-cta" data-i18n="nav_all_games">129+ Mobile Apps</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Instant Playable Arcade Stage -->
+    <section class="arcade-stage-section">
+      <div class="container">
+        <div class="stage-top-bar">
+          <div>
+            <h1 class="stage-headline" data-i18n="hero_title">PLAY INSTANT <span>MINI-GAMES</span></h1>
+            <p class="stage-subtitle" data-i18n="hero_sub">Zero install. Tap any puzzle below to play immediately in your browser and earn arcade coins.</p>
+          </div>
+        </div>
+
+        <!-- 5 Built-in Instant HTML5 Game Tabs -->
+        <div class="game-tabs" role="tablist">
+          <button type="button" class="game-tab-btn active" data-game="watersort">
+            <img src="img/43_s.png" alt="Water Sort Puzzle" class="game-tab-icon" width="44" height="44">
+            <div class="game-tab-info">
+              <div class="game-tab-title">Water Sort Pour</div>
+              <div class="game-tab-tag">Color Logic</div>
+            </div>
+          </button>
+          <button type="button" class="game-tab-btn" data-game="merge2048">
+            <img src="img/1_s.png" alt="2048 Merge Blocks" class="game-tab-icon" width="44" height="44">
+            <div class="game-tab-info">
+              <div class="game-tab-title">2048 Number Merge</div>
+              <div class="game-tab-tag">Math &amp; Merge</div>
+            </div>
+          </button>
+          <button type="button" class="game-tab-btn" data-game="blockblast">
+            <img src="img/2_s.png" alt="Block Blast 8x8" class="game-tab-icon" width="44" height="44">
+            <div class="game-tab-info">
+              <div class="game-tab-title">Block Blast 8x8</div>
+              <div class="game-tab-tag">Classic Grid</div>
+            </div>
+          </button>
+          <button type="button" class="game-tab-btn" data-game="bubblepop">
+            <img src="img/7_s.png" alt="Bubble Pop Blitz" class="game-tab-icon" width="44" height="44">
+            <div class="game-tab-info">
+              <div class="game-tab-title">Bubble Pop Blitz</div>
+              <div class="game-tab-tag">Cluster Match</div>
+            </div>
+          </button>
+          <button type="button" class="game-tab-btn" data-game="mahjong">
+            <img src="img/8_s.png" alt="Mahjong Triple Match" class="game-tab-icon" width="44" height="44">
+            <div class="game-tab-info">
+              <div class="game-tab-title">Mahjong Triple</div>
+              <div class="game-tab-tag">3-Tile Tray</div>
+            </div>
+          </button>
+        </div>
+
+        <!-- 12-Column Workspace: Left 8 Cols Interactive Stage, Right 4 Cols Rewards & App Cross-Promo -->
+        <div class="swiss-grid play-workspace">
+          <div class="canvas-column">
+            <div class="game-hud">
+              <div class="hud-left">
+                <span class="hud-game-name" id="active-game-title">Water Sort Pour</span>
+                <div class="hud-stats tabular">
+                  <span id="hud-stat-1">LEVEL 1</span>
+                  <span id="hud-stat-2">MOVES: 0</span>
+                </div>
+              </div>
+              <div class="hud-actions">
+                <button type="button" class="hud-btn" id="btn-game-hint">+50 Coins Hint</button>
+                <button type="button" class="hud-btn primary" id="btn-game-reset" data-i18n="btn_restart">New / Reset</button>
+              </div>
+            </div>
+
+            <div class="game-stage-viewport">
+              <!-- GAME 1: Water Sort Puzzle -->
+              <div class="game-panel active" id="panel-watersort">
+                <div class="tubes-grid" id="watersort-tubes"></div>
+                <div class="game-help-bar">
+                  <span class="help-text" id="watersort-status">Tap a tube to pick up the top color, then tap another tube with matching top color or empty space.</span>
+                  <button type="button" class="hud-btn" id="btn-watersort-next">Next Level &rarr;</button>
+                </div>
+              </div>
+
+              <!-- GAME 2: 2048 Merge Blocks -->
+              <div class="game-panel" id="panel-merge2048">
+                <div class="board-2048-wrap">
+                  <div class="board-2048 tabular" id="board-2048"></div>
+                  <div class="dpad-row">
+                    <button type="button" class="hud-btn" data-dir="left">&larr; Left</button>
+                    <button type="button" class="hud-btn" data-dir="up">&uarr; Up</button>
+                    <button type="button" class="hud-btn" data-dir="down">&darr; Down</button>
+                    <button type="button" class="hud-btn" data-dir="right">Right &rarr;</button>
+                  </div>
+                </div>
+                <div class="game-help-bar">
+                  <span class="help-text" id="status-2048">Use Arrow Keys, Swipe, or buttons above to merge matching numbers to 2048!</span>
+                </div>
+              </div>
+
+              <!-- GAME 3: Block Blast 8x8 -->
+              <div class="game-panel" id="panel-blockblast">
+                <div class="block-blast-layout">
+                  <div class="grid-8x8" id="bb-grid"></div>
+                  <div class="bb-dock" id="bb-dock"></div>
+                </div>
+                <div class="game-help-bar">
+                  <span class="help-text" id="bb-status">1. Select a block piece below &rarr; 2. Tap a cell on the 8x8 board to place it and clear full rows or columns!</span>
+                </div>
+              </div>
+
+              <!-- GAME 4: Bubble Pop Blitz -->
+              <div class="game-panel" id="panel-bubblepop">
+                <div class="bubble-wrap">
+                  <div class="bubble-grid" id="bubble-grid"></div>
+                </div>
+                <div class="game-help-bar">
+                  <span class="help-text" id="bubble-status">Tap any group of 2 or more connected bubbles of the same color to pop them for massive combo points!</span>
+                </div>
+              </div>
+
+              <!-- GAME 5: Mahjong Triple Match -->
+              <div class="game-panel" id="panel-mahjong">
+                <div class="mahjong-wrap">
+                  <div class="mahjong-board" id="mahjong-board"></div>
+                  <div class="mj-tray" id="mahjong-tray"></div>
+                </div>
+                <div class="game-help-bar">
+                  <span class="help-text" id="mahjong-status">Tap tiles to move them into your 7-slot tray. Collect 3 identical symbols to clear them before the tray fills up!</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Sidebar: Monetization, Daily Bonus & Native App Match -->
+          <aside class="sidebar-column">
+            <!-- Block 1: Daily Bonus & Reward Center (Monetization Slot + Freecash Cash Out) -->
+            <div class="promo-block promo-yellow" id="reward-center-card">
+              <span class="promo-kicker" data-i18n="reward_kicker">PLAYER REWARD &amp; CASH-OUT CENTER</span>
+              <h2 class="promo-title" data-i18n="reward_title">Earn $5–$30 Daily Playing Games</h2>
+              <p class="promo-desc" data-i18n="reward_desc">Looking to cash out real rewards (PayPal / Gift Cards) by testing casual mobile games? Join our official partner reward hub or claim +150 Arcade Coins below.</p>
+              <a href="https://freecash.com/r/377QCT" target="_blank" rel="noopener noreferrer" class="promo-btn" id="freecash-reward-link" data-i18n="freecash_btn">Claim Cash-Out Rewards ($5–$30/Day) &rarr;</a>
+              <button type="button" class="promo-btn" style="background-color:var(--surface);color:var(--ink);" id="btn-daily-spin" data-i18n="reward_btn">Spin Daily Wheel (+150 Arcade Coins)</button>
+            </div>
+
+            <!-- Block 2: Matched Full Android/iOS App Download -->
+            <div class="promo-block promo-teal">
+              <span class="promo-kicker" data-i18n="app_kicker">OFFICIAL MOBILE APP</span>
+              <div class="matched-app-row">
+                <img src="img/43_s.png" alt="Matched App Icon" class="matched-app-icon" id="matched-app-icon" width="60" height="60">
+                <div>
+                  <h3 class="promo-title" id="matched-app-name">Water Sort-puzzle games</h3>
+                  <p class="promo-desc">1,000+ offline levels &amp; smooth 60fps effects on Android &amp; iOS.</p>
+                </div>
+              </div>
+              <a href="https://play.google.com/store/apps/details?id=water.sort.puzzlegame.soda" target="_blank" rel="noopener" class="promo-btn yellow" id="matched-app-link" data-i18n="app_btn">Get Full App on Google Play &rarr;</a>
+            </div>
+
+            <!-- Block 3: Player Support & Feedback FAQ (Answers Email Users Directly!) -->
+            <div class="promo-block promo-surface">
+              <span class="promo-kicker" style="color: var(--field-4);" data-i18n="faq_kicker">SUPPORT &amp; FEEDBACK</span>
+              <h3 class="promo-title" data-i18n="faq_title">Frequently Asked by Players</h3>
+              <p class="promo-desc" data-i18n="faq_desc">
+                <strong>Stuck on a level?</strong> Use the free Undo / Extra Tube button in our web arcade above to practice!<br><br>
+                <strong>Game Coins &amp; Rewards:</strong> In-game coins and scores are entertainment points for unlocking themes, hints, and new puzzle stages.
+              </p>
+              <a href="https://play.google.com/store/apps/dev?id=5233851887688172838" target="_blank" rel="noopener" class="promo-btn">Visit Official Google Play Store</a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- Full 129+ Game Matrix with "Play Similar Web Mode" & "Google Play" -->
+    <section class="catalog-section" id="full-catalog">
+      <div class="container">
+        <div class="catalog-header">
+          <div>
+            <h2 class="stage-headline" style="font-size: var(--step-head);" data-i18n="cat_title">ALL 129+ CASUAL PUZZLE GAMES</h2>
+            <p class="help-text" data-i18n="cat_sub">Tap "Instant Web Mode" to play that genre right here in your browser, or download the full mobile edition on Google Play.</p>
+          </div>
+          <div class="tabular help-text" id="catalog-count">129 Games Available</div>
+        </div>
+
+        <div class="catalog-controls">
+          <input type="search" id="catalog-search" class="search-input" placeholder="Search 2048, Water Sort, Mahjong, Bubble, Block..." aria-label="Search games">
+          <button type="button" class="filter-pill active" data-cat="all">All (129)</button>
+          <button type="button" class="filter-pill" data-cat="sort">Water &amp; Color Sort</button>
+          <button type="button" class="filter-pill" data-cat="merge">2048 &amp; Merge</button>
+          <button type="button" class="filter-pill" data-cat="block">Block Puzzle</button>
+          <button type="button" class="filter-pill" data-cat="mahjong">Mahjong &amp; Tile</button>
+          <button type="button" class="filter-pill" data-cat="bubble">Bubble &amp; Arcade</button>
+        </div>
+
+        <div class="catalog-grid" id="catalog-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>&copy; 2026 GuoLingZhi Network (`lab.gkismet.com`). All 129+ Casual Mobile &amp; Instant Web Games.</div>
+      <div style="display:flex; gap:20px;">
+        <a href="index.html">Studio Home</a>
+        <a href="PrivacyPolicy.txt">Privacy Policy</a>
+        <a href="app-ads.txt">app-ads.txt</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* =========================================================================
+       MONETIZATION & PROMO CONFIG (Edit URL here anytime to plug in Monetag / AdSense / Affiliate)
+       ========================================================================= */
+    const MONETIZATION_CONFIG = {
+      // Partner reward link (Freecash referral already configured from your main site!)
+      sponsorDirectLink: "https://freecash.com/r/377QCT",
+      coinsPerWin: 50
+    };
+
+    /* =========================================================================
+       MULTILINGUAL SUPPORT (EN / AR / ID / ES - Matches Top 4 Email Languages)
+       ========================================================================= */
+    const I18N = {
+      en: {
+        nav_all_games: "129+ Mobile Apps",
+        hero_title: "PLAY INSTANT <span>MINI-GAMES</span>",
+        hero_sub: "Zero install. Tap any puzzle below to play immediately in your browser and earn arcade coins.",
+        btn_restart: "New / Reset",
+        reward_kicker: "PLAYER REWARD & CASH-OUT CENTER",
+        reward_title: "Earn $5–$30 Daily Playing Games",
+        reward_desc: "Looking to cash out real rewards (PayPal / Gift Cards) by testing casual mobile games? Join our official partner reward hub or claim +150 Arcade Coins below.",
+        freecash_btn: "Claim Cash-Out Rewards ($5–$30/Day) →",
+        reward_btn: "Spin Daily Wheel (+150 Arcade Coins)",
+        app_kicker: "OFFICIAL MOBILE APP",
+        app_btn: "Get Full App on Google Play →",
+        faq_kicker: "SUPPORT & FEEDBACK",
+        faq_title: "Player Support Center",
+        cat_title: "ALL 129+ CASUAL PUZZLE GAMES",
+        cat_sub: "Tap 'Web Play' to launch that puzzle genre in your browser, or get the full mobile app."
+      },
+      ar: {
+        nav_all_games: "+129 تطبيق موبايل",
+        hero_title: "العب ألعاب فورية <span>بدون تحميل</span>",
+        hero_sub: "لا حاجة للتثبيت! اختر أي لعبة ذكاء بالأسفل للعب فوراً في متصفحك واكسب نقاط المكافآت.",
+        btn_restart: "إعادة اللعب",
+        reward_kicker: "مركز المكافآت وسحب الأرباح",
+        reward_title: "اربح 5$ إلى 30$ يومياً من اللعب",
+        reward_desc: "هل تبحث عن سحب مكافآت حقيقية (PayPal / بطاقات هدايا) من تجربة الألعاب؟ انضم لمركز المكافآت الرسمي بالأسفل.",
+        freecash_btn: "ابدأ ربح وسحب المكافآت الآن ←",
+        reward_btn: "احصل على مكافأة اليوم (+150 عملة)",
+        app_kicker: "التطبيق الرسمي الكامل",
+        app_btn: "تحميل من Google Play ←",
+        faq_kicker: "الدعم الفني والمساعدة",
+        faq_title: "مركز مساعدة اللاعبين",
+        cat_title: "جميع ألعاب الذكاء (+129 لعبة)",
+        cat_sub: "العب مباشرة على المتصفح أو حمل النسخة الكاملة مجاناً."
+      },
+      id: {
+        nav_all_games: "129+ Game HP",
+        hero_title: "MAINKAN GAME <span>INSTAN TANPA INSTAL</span>",
+        hero_sub: "Langsung main di browser! Pilih game puzzle di bawah untuk bermain dan kumpulkan koin hadiah.",
+        btn_restart: "Ulangi / Baru",
+        reward_kicker: "PUSAT HADIAH & PENARIKAN SALDO",
+        reward_title: "Hasilkan $5–$30/Hari Main Game",
+        reward_desc: "Ingin mencairkan hadiah nyata (PayPal / Gift Card) dengan mencoba game santai? Buka pusat hadiah mitra resmi kami di bawah.",
+        freecash_btn: "Klaim Hadiah & Cash Out ($5–$30/Hari) →",
+        reward_btn: "Klaim Bonus Harian (+150 Koin)",
+        app_kicker: "APLIKASI RESMI LENGKAP",
+        app_btn: "Unduh di Google Play →",
+        faq_kicker: "BANTUAN & UMPAN BALIK",
+        faq_title: "Pusat Bantuan Pemain",
+        cat_title: "SEMUA 129+ GAME PUZZLE SANTAI",
+        cat_sub: "Klik 'Main Web' untuk bermain langsung di browser atau unduh aplikasi lengkapnya."
+      },
+      es: {
+        nav_all_games: "129+ Apps Móviles",
+        hero_title: "JUEGA MINIJUEGOS <span>AL INSTANTE</span>",
+        hero_sub: "Sin instalar nada. Toca cualquier puzzle abajo para jugar directamente en tu navegador.",
+        btn_restart: "Reiniciar",
+        reward_kicker: "CENTRO DE RECOMPENSAS Y RETIROS",
+        reward_title: "Gana $5–$30 Diarios Jugando",
+        reward_desc: "¿Buscas retirar recompensas reales (PayPal / Tarjetas de Regalo) probando juegos? Entra a nuestro centro oficial de premios abajo.",
+        freecash_btn: "Reclamar Recompensas ($5–$30/Día) →",
+        reward_btn: "Girar Ruleta Diaria (+150 Monedas)",
+        app_kicker: "APP MÓVIL OFICIAL",
+        app_btn: "Descargar en Google Play →",
+        faq_kicker: "SOPORTE Y COMENTARIOS",
+        faq_title: "Centro de Ayuda al Jugador",
+        cat_title: "LOS 129+ JUEGOS DE PUZZLE",
+        cat_sub: "Toca 'Jugar Web' para jugar al instante en el navegador o descarga la app en Google Play."
+      }
+    };
+
+    const langSelect = document.getElementById('lang-switcher');
+    function applyLang(lang) {
+      const dict = I18N[lang] || I18N.en;
+      document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key]) el.innerHTML = dict[key];
+      });
+    }
+    langSelect.addEventListener('change', e => applyLang(e.target.value));
+    const browserLang = (navigator.language || 'en').slice(0, 2).toLowerCase();
+    if (I18N[browserLang]) {
+      langSelect.value = browserLang;
+      applyLang(browserLang);
+    }
+
+    /* =========================================================================
+       COIN WALLET SYSTEM
+       ========================================================================= */
+    let coins = parseInt(localStorage.getItem('glz_arcade_coins') || '100', 10);
+    const coinEl = document.getElementById('coin-counter');
+    function addCoins(delta) {
+      coins = Math.max(0, coins + delta);
+      coinEl.textContent = coins;
+      localStorage.setItem('glz_arcade_coins', String(coins));
+    }
+    addCoins(0);
+
+    document.getElementById('btn-daily-spin').addEventListener('click', (e) => {
+      const btn = e.currentTarget;
+      if (btn.dataset.claimed !== '1') {
+        addCoins(150);
+        btn.dataset.claimed = '1';
+        btn.textContent = '✓ +150 Coins Added! Play Games for More';
+      }
+      if (MONETIZATION_CONFIG.sponsorDirectLink) {
+        window.open(MONETIZATION_CONFIG.sponsorDirectLink, '_blank', 'noopener');
+      }
+    });
+
+    /* =========================================================================
+       GAME TAB SWITCHING & MATCHED GOOGLE PLAY APP
+       ========================================================================= */
+    const GAME_META = {
+      watersort: {
+        title: 'Water Sort Pour',
+        icon: 'img/43_s.png',
+        appName: 'Water Sort-puzzle games',
+        pkg: 'water.sort.puzzlegame.soda'
+      },
+      merge2048: {
+        title: '2048 Number Merge',
+        icon: 'img/1_s.png',
+        appName: 'Number Games-2048 Blocks',
+        pkg: 'com.x2blocks.puzzlegame.number.merge'
+      },
+      blockblast: {
+        title: 'Block Blast 8x8',
+        icon: 'img/2_s.png',
+        appName: 'Block Puzzle-Classic Block Game',
+        pkg: 'new1010.tetris.blockpuzzle.classic.puzzlegames'
+      },
+      bubblepop: {
+        title: 'Bubble Pop Blitz',
+        icon: 'img/7_s.png',
+        appName: 'Bubble Shooter',
+        pkg: 'com.bubble.pop.shooter.bird'
+      },
+      mahjong: {
+        title: 'Mahjong Triple Match',
+        icon: 'img/8_s.png',
+        appName: 'Mahjong&Match Puzzle Games',
+        pkg: 'com.free.mahjong.classic.puzzlegame'
+      }
+    };
+
+    let currentGame = 'watersort';
+    const stat1El = document.getElementById('hud-stat-1');
+    const stat2El = document.getElementById('hud-stat-2');
+
+    function switchGame(gameKey) {
+      currentGame = gameKey;
+      document.querySelectorAll('.game-tab-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.game === gameKey);
+      });
+      document.querySelectorAll('.game-panel').forEach(panel => {
+        panel.classList.toggle('active', panel.id === 'panel-' + gameKey);
+      });
+      const meta = GAME_META[gameKey];
+      document.getElementById('active-game-title').textContent = meta.title;
+      document.getElementById('matched-app-icon').src = meta.icon;
+      document.getElementById('matched-app-name').textContent = meta.appName;
+      document.getElementById('matched-app-link').href = 'https://play.google.com/store/apps/details?id=' + meta.pkg;
+      updateHudForCurrentGame();
+    }
+
+    document.querySelectorAll('.game-tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => switchGame(btn.dataset.game));
+    });
+
+    /* =========================================================================
+       GAME 1: WATER SORT PUZZLE
+       ========================================================================= */
+    const WS_COLORS = ['#9e1111', '#123196', '#075245', '#ffe927', '#e66100', '#882255'];
+    let wsLevel = 1;
+    let wsMoves = 0;
+    let wsTubes = [];
+    let wsSelected = -1;
+
+    function initWaterSort(level = wsLevel) {
+      wsLevel = level;
+      wsMoves = 0;
+      wsSelected = -1;
+      const numColors = Math.min(3 + Math.floor((level - 1) / 2), 5);
+      const pool = [];
+      for (let c = 0; c < numColors; c++) {
+        for (let i = 0; i < 4; i++) pool.push(WS_COLORS[c]);
+      }
+      for (let i = pool.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [pool[i], pool[j]] = [pool[j], pool[i]];
+      }
+      wsTubes = [];
+      for (let t = 0; t < numColors; t++) {
+        wsTubes.push(pool.slice(t * 4, (t + 1) * 4));
+      }
+      wsTubes.push([]);
+      wsTubes.push([]);
+      renderWaterSort();
+    }
+
+    function renderWaterSort() {
+      const container = document.getElementById('watersort-tubes');
+      container.innerHTML = '';
+      wsTubes.forEach((tube, idx) => {
+        const tubeEl = document.createElement('button');
+        tubeEl.type = 'button';
+        tubeEl.className = 'water-tube' + (wsSelected === idx ? ' selected' : '');
+        tubeEl.setAttribute('aria-label', 'Tube ' + (idx + 1));
+        tube.forEach(color => {
+          const layer = document.createElement('div');
+          layer.className = 'water-layer';
+          layer.style.backgroundColor = color;
+          tubeEl.appendChild(layer);
+        });
+        tubeEl.addEventListener('click', () => onTubeTap(idx));
+        container.appendChild(tubeEl);
+      });
+      if (currentGame === 'watersort') {
+        stat1El.textContent = 'LEVEL ' + wsLevel;
+        stat2El.textContent = 'MOVES: ' + wsMoves;
+      }
+    }
+
+    function onTubeTap(idx) {
+      if (wsSelected === -1) {
+        if (wsTubes[idx].length > 0) {
+          wsSelected = idx;
+          renderWaterSort();
+        }
+        return;
+      }
+      if (wsSelected === idx) {
+        wsSelected = -1;
+        renderWaterSort();
+        return;
+      }
+      const from = wsTubes[wsSelected];
+      const to = wsTubes[idx];
+      if (from.length > 0 && to.length < 4) {
+        const topColor = from[from.length - 1];
+        if (to.length === 0 || to[to.length - 1] === topColor) {
+          while (from.length > 0 && from[from.length - 1] === topColor && to.length < 4) {
+            to.push(from.pop());
+          }
+          wsMoves++;
+          wsSelected = -1;
+          renderWaterSort();
+          checkWaterSortWin();
+          return;
+        }
+      }
+      wsSelected = idx;
+      renderWaterSort();
+    }
+
+    function checkWaterSortWin() {
+      const won = wsTubes.every(t => t.length === 0 || (t.length === 4 && t.every(c => c === t[0])));
+      if (won) {
+        addCoins(MONETIZATION_CONFIG.coinsPerWin);
+        document.getElementById('watersort-status').textContent = '🎉 Level ' + wsLevel + ' Cleared! +50 Arcade Coins earned!';
+      }
+    }
+
+    document.getElementById('btn-watersort-next').addEventListener('click', () => {
+      initWaterSort(wsLevel + 1);
+      document.getElementById('watersort-status').textContent = 'Level ' + wsLevel + ' started! Sort all colors into separate tubes.';
+    });
+
+    /* =========================================================================
+       GAME 2: 2048 NUMBER MERGE
+       ========================================================================= */
+    let grid2048 = Array(16).fill(0);
+    let score2048 = 0;
+
+    function spawn2048() {
+      const empty = [];
+      grid2048.forEach((v, i) => { if (!v) empty.push(i); });
+      if (empty.length) {
+        const pick = empty[Math.floor(Math.random() * empty.length)];
+        grid2048[pick] = Math.random() < 0.85 ? 2 : 4;
+      }
+    }
+
+    function init2048() {
+      grid2048 = Array(16).fill(0);
+      score2048 = 0;
+      spawn2048();
+      spawn2048();
+      render2048();
+    }
+
+    function render2048() {
+      const board = document.getElementById('board-2048');
+      board.innerHTML = '';
+      grid2048.forEach(val => {
+        const cell = document.createElement('div');
+        cell.className = 'cell-2048';
+        if (val) {
+          cell.dataset.v = String(val);
+          cell.textContent = val;
+        }
+        board.appendChild(cell);
+      });
+      if (currentGame === 'merge2048') {
+        stat1El.textContent = 'SCORE: ' + score2048;
+        stat2El.textContent = 'MAX: ' + Math.max(...grid2048);
+      }
+    }
+
+    function slideRow2048(row) {
+      const arr = row.filter(Boolean);
+      for (let i = 0; i < arr.length - 1; i++) {
+        if (arr[i] === arr[i + 1]) {
+          arr[i] *= 2;
+          score2048 += arr[i];
+          if (arr[i] >= 128) addCoins(5);
+          arr.splice(i + 1, 1);
+        }
+      }
+      while (arr.length < 4) arr.push(0);
+      return arr;
+    }
+
+    function move2048(dir) {
+      const before = grid2048.join(',');
+      for (let i = 0; i < 4; i++) {
+        let idxs;
+        if (dir === 'left') idxs = [i*4, i*4+1, i*4+2, i*4+3];
+        if (dir === 'right') idxs = [i*4+3, i*4+2, i*4+1, i*4];
+        if (dir === 'up') idxs = [i, i+4, i+8, i+12];
+        if (dir === 'down') idxs = [i+12, i+8, i+4, i];
+        const next = slideRow2048(idxs.map(k => grid2048[k]));
+        idxs.forEach((k, p) => { grid2048[k] = next[p]; });
+      }
+      if (grid2048.join(',') !== before) {
+        spawn2048();
+        render2048();
+      }
+    }
+
+    document.querySelectorAll('[data-dir]').forEach(btn => {
+      btn.addEventListener('click', () => move2048(btn.dataset.dir));
+    });
+    window.addEventListener('keydown', e => {
+      if (currentGame !== 'merge2048') return;
+      const map = { ArrowLeft: 'left', ArrowRight: 'right', ArrowUp: 'up', ArrowDown: 'down' };
+      if (map[e.key]) {
+        e.preventDefault();
+        move2048(map[e.key]);
+      }
+    });
+
+    /* =========================================================================
+       GAME 3: BLOCK BLAST 8x8
+       ========================================================================= */
+    const BB_SHAPES = [
+      { name: '3x1 Bar', coords: [[0,0],[0,1],[0,2]], color: '#ffe927' },
+      { name: '2x2 Square', coords: [[0,0],[0,1],[1,0],[1,1]], color: '#123196' },
+      { name: 'L-Corner', coords: [[0,0],[1,0],[1,1]], color: '#9e1111' },
+      { name: 'Vertical 3', coords: [[0,0],[1,0],[2,0]], color: '#075245' },
+      { name: 'Single Dot', coords: [[0,0]], color: '#ffe927' }
+    ];
+    let bbBoard = Array(64).fill('');
+    let bbScore = 0;
+    let bbPieces = [];
+    let bbSelectedPiece = 0;
+
+    function initBlockBlast() {
+      bbBoard = Array(64).fill('');
+      bbScore = 0;
+      dealBbPieces();
+      renderBlockBlast();
+    }
+
+    function dealBbPieces() {
+      bbPieces = [0, 1, 2].map(() => ({
+        ...BB_SHAPES[Math.floor(Math.random() * BB_SHAPES.length)],
+        used: false
+      }));
+      bbSelectedPiece = 0;
+    }
+
+    function renderBlockBlast() {
+      const gridEl = document.getElementById('bb-grid');
+      gridEl.innerHTML = '';
+      bbBoard.forEach((color, idx) => {
+        const cell = document.createElement('button');
+        cell.type = 'button';
+        cell.className = 'bb-cell';
+        if (color) cell.style.backgroundColor = color;
+        cell.addEventListener('click', () => placeBbPiece(Math.floor(idx / 8), idx % 8));
+        gridEl.appendChild(cell);
+      });
+
+      const dockEl = document.getElementById('bb-dock');
+      dockEl.innerHTML = '';
+      bbPieces.forEach((p, idx) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'bb-piece-btn' + (bbSelectedPiece === idx && !p.used ? ' selected' : '');
+        btn.disabled = p.used;
+        btn.innerHTML = '<span style="font-family:var(--font-display);font-size:0.75rem;font-weight:700;">' + (p.used ? 'PLACED' : p.name) + '</span>';
+        btn.addEventListener('click', () => {
+          bbSelectedPiece = idx;
+          renderBlockBlast();
+        });
+        dockEl.appendChild(btn);
+      });
+
+      if (currentGame === 'blockblast') {
+        stat1El.textContent = 'SCORE: ' + bbScore;
+        stat2El.textContent = 'GRID: 8x8';
+      }
+    }
+
+    function placeBbPiece(r, c) {
+      const piece = bbPieces[bbSelectedPiece];
+      if (!piece || piece.used) return;
+      for (const [dr, dc] of piece.coords) {
+        const nr = r + dr, nc = c + dc;
+        if (nr >= 8 || nc >= 8 || bbBoard[nr * 8 + nc]) {
+          document.getElementById('bb-status').textContent = 'Cannot fit there! Try an empty spot on the 8x8 grid.';
+          return;
+        }
+      }
+      for (const [dr, dc] of piece.coords) {
+        bbBoard[(r + dr) * 8 + (c + dc)] = piece.color;
+      }
+      piece.used = true;
+      bbScore += piece.coords.length * 10;
+
+      // Check full rows & cols
+      const fullRows = [], fullCols = [];
+      for (let i = 0; i < 8; i++) {
+        if ([0,1,2,3,4,5,6,7].every(k => bbBoard[i * 8 + k])) fullRows.push(i);
+        if ([0,1,2,3,4,5,6,7].every(k => bbBoard[k * 8 + i])) fullCols.push(i);
+      }
+      fullRows.forEach(ri => { for (let k = 0; k < 8; k++) bbBoard[ri * 8 + k] = ''; });
+      fullCols.forEach(ci => { for (let k = 0; k < 8; k++) bbBoard[k * 8 + ci] = ''; });
+      if (fullRows.length + fullCols.length > 0) {
+        bbScore += (fullRows.length + fullCols.length) * 100;
+        addCoins((fullRows.length + fullCols.length) * 20);
+        document.getElementById('bb-status').textContent = '🔥 Line Clear Combo! +' + ((fullRows.length + fullCols.length) * 20) + ' Coins!';
+      }
+
+      if (bbPieces.every(p => p.used)) {
+        dealBbPieces();
+      } else {
+        bbSelectedPiece = bbPieces.findIndex(p => !p.used);
+      }
+      renderBlockBlast();
+    }
+
+    /* =========================================================================
+       GAME 4: BUBBLE POP BLITZ
+       ========================================================================= */
+    const BP_COLORS = ['#9e1111', '#123196', '#075245', '#ffe927'];
+    let bpGrid = [];
+    let bpScore = 0;
+
+    function initBubblePop() {
+      bpScore = 0;
+      bpGrid = Array.from({ length: 49 }, () => BP_COLORS[Math.floor(Math.random() * BP_COLORS.length)]);
+      renderBubblePop();
+    }
+
+    function renderBubblePop() {
+      const el = document.getElementById('bubble-grid');
+      el.innerHTML = '';
+      bpGrid.forEach((color, idx) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'bubble-node';
+        btn.style.backgroundColor = color || 'var(--bg)';
+        if (color === '#ffe927') btn.style.color = '#111';
+        btn.textContent = color ? '●' : '';
+        btn.addEventListener('click', () => popBubbleCluster(idx));
+        el.appendChild(btn);
+      });
+      if (currentGame === 'bubblepop') {
+        stat1El.textContent = 'SCORE: ' + bpScore;
+        stat2El.textContent = 'BUBBLES: ' + bpGrid.filter(Boolean).length;
+      }
+    }
+
+    function popBubbleCluster(startIdx) {
+      const target = bpGrid[startIdx];
+      if (!target) return;
+      const visited = new Set([startIdx]);
+      const queue = [startIdx];
+      while (queue.length) {
+        const curr = queue.shift();
+        const r = Math.floor(curr / 7), c = curr % 7;
+        [[r-1,c],[r+1,c],[r,c-1],[r,c+1]].forEach(([nr, nc]) => {
+          if (nr >= 0 && nr < 7 && nc >= 0 && nc < 7) {
+            const ni = nr * 7 + nc;
+            if (!visited.has(ni) && bpGrid[ni] === target) {
+              visited.add(ni);
+              queue.push(ni);
+            }
+          }
+        });
+      }
+      if (visited.size < 2) {
+        document.getElementById('bubble-status').textContent = 'Tap at least 2 connected bubbles of the same color!';
+        return;
+      }
+      visited.forEach(i => { bpGrid[i] = ''; });
+      // Gravity drop & refill
+      for (let c = 0; c < 7; c++) {
+        const col = [];
+        for (let r = 6; r >= 0; r--) {
+          if (bpGrid[r * 7 + c]) col.push(bpGrid[r * 7 + c]);
+        }
+        while (col.length < 7) col.push(BP_COLORS[Math.floor(Math.random() * BP_COLORS.length)]);
+        for (let r = 6, k = 0; r >= 0; r--, k++) {
+          bpGrid[r * 7 + c] = col[k];
+        }
+      }
+      const pts = visited.size * visited.size * 10;
+      bpScore += pts;
+      if (visited.size >= 4) addCoins(15);
+      document.getElementById('bubble-status').textContent = '💥 Popped ' + visited.size + ' bubbles (+' + pts + ' pts)!';
+      renderBubblePop();
+    }
+
+    /* =========================================================================
+       GAME 5: MAHJONG TRIPLE MATCH
+       ========================================================================= */
+    const MJ_SYMBOLS = ['🀄', '🎋', '🏮', '🐉', '🌸', '🪙'];
+    let mjTiles = [];
+    let mjTray = [];
+    let mjCleared = 0;
+
+    function initMahjong() {
+      mjTray = [];
+      mjCleared = 0;
+      mjTiles = [];
+      MJ_SYMBOLS.forEach(sym => {
+        for (let i = 0; i < 3; i++) mjTiles.push({ sym, cleared: false });
+      });
+      for (let i = mjTiles.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [mjTiles[i], mjTiles[j]] = [mjTiles[j], mjTiles[i]];
+      }
+      renderMahjong();
+    }
+
+    function renderMahjong() {
+      const board = document.getElementById('mahjong-board');
+      board.innerHTML = '';
+      mjTiles.forEach((tile, idx) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'mj-tile' + (tile.cleared ? ' cleared' : '');
+        btn.textContent = tile.sym;
+        btn.addEventListener('click', () => pickMjTile(idx));
+        board.appendChild(btn);
+      });
+
+      const trayEl = document.getElementById('mahjong-tray');
+      trayEl.innerHTML = '';
+      for (let i = 0; i < 7; i++) {
+        const slot = document.createElement('div');
+        slot.className = 'mj-slot';
+        slot.textContent = mjTray[i] || '';
+        trayEl.appendChild(slot);
+      }
+
+      if (currentGame === 'mahjong') {
+        stat1El.textContent = 'REMAINING: ' + mjTiles.filter(t => !t.cleared).length;
+        stat2El.textContent = 'TRAY: ' + mjTray.length + '/7';
+      }
+    }
+
+    function pickMjTile(idx) {
+      if (mjTiles[idx].cleared || mjTray.length >= 7) return;
+      const sym = mjTiles[idx].sym;
+      mjTiles[idx].cleared = true;
+      mjTray.push(sym);
+
+      const count = mjTray.filter(s => s === sym).length;
+      if (count >= 3) {
+        let removed = 0;
+        mjTray = mjTray.filter(s => {
+          if (s === sym && removed < 3) { removed++; return false; }
+          return true;
+        });
+        mjCleared += 3;
+        addCoins(25);
+        document.getElementById('mahjong-status').textContent = '✨ Triple Match Cleared! +25 Coins!';
+      }
+
+      if (mjTiles.every(t => t.cleared)) {
+        addCoins(MONETIZATION_CONFIG.coinsPerWin);
+        document.getElementById('mahjong-status').textContent = '🏆 All Mahjong Tiles Cleared! +50 Bonus Coins!';
+      } else if (mjTray.length >= 7) {
+        document.getElementById('mahjong-status').textContent = 'Tray Full! Tap "New / Reset" to try again.';
+      }
+      renderMahjong();
+    }
+
+    /* =========================================================================
+       HUD RESET & HINT CONTROLS
+       ========================================================================= */
+    function updateHudForCurrentGame() {
+      if (currentGame === 'watersort') renderWaterSort();
+      if (currentGame === 'merge2048') render2048();
+      if (currentGame === 'blockblast') renderBlockBlast();
+      if (currentGame === 'bubblepop') renderBubblePop();
+      if (currentGame === 'mahjong') renderMahjong();
+    }
+
+    document.getElementById('btn-game-reset').addEventListener('click', () => {
+      if (currentGame === 'watersort') initWaterSort(wsLevel);
+      if (currentGame === 'merge2048') init2048();
+      if (currentGame === 'blockblast') initBlockBlast();
+      if (currentGame === 'bubblepop') initBubblePop();
+      if (currentGame === 'mahjong') initMahjong();
+    });
+
+    document.getElementById('btn-game-hint').addEventListener('click', () => {
+      if (currentGame === 'watersort') {
+        wsTubes.push([]);
+        renderWaterSort();
+        document.getElementById('watersort-status').textContent = '🧪 Extra Empty Tube unlocked!';
+      } else if (currentGame === 'mahjong' && mjTray.length > 0) {
+        mjTray.pop();
+        renderMahjong();
+      } else {
+        addCoins(50);
+      }
+    });
+
+    // Initialize all 5 games
+    initWaterSort(1);
+    init2048();
+    initBlockBlast();
+    initBubblePop();
+    initMahjong();
+
+    /* =========================================================================
+       LOAD ALL 129+ GAMES FROM cfg/more_game.json & LINK TO INSTANT WEB PLAY
+       ========================================================================= */
+    let allGames = [];
+    let activeCat = 'all';
+
+    function classifyGame(g) {
+      const n = (g.name + ' ' + g.pkg_name).toLowerCase();
+      if (n.includes('sort') || n.includes('water') || n.includes('pour')) return { cat: 'sort', webGame: 'watersort' };
+      if (n.includes('2048') || n.includes('2248') || n.includes('merge') || n.includes('dice')) return { cat: 'merge', webGame: 'merge2048' };
+      if (n.includes('mahjong') || n.includes('tile') || n.includes('onet')) return { cat: 'mahjong', webGame: 'mahjong' };
+      if (n.includes('bubble') || n.includes('brick') || n.includes('ball')) return { cat: 'bubble', webGame: 'bubblepop' };
+      return { cat: 'block', webGame: 'blockblast' };
+    }
+
+    function renderCatalog() {
+      const q = (document.getElementById('catalog-search').value || '').toLowerCase().trim();
+      const grid = document.getElementById('catalog-grid');
+      const filtered = allGames.filter(g => {
+        const info = classifyGame(g);
+        const matchCat = activeCat === 'all' || info.cat === activeCat;
+        const matchQ = !q || g.name.toLowerCase().includes(q) || g.pkg_name.toLowerCase().includes(q);
+        return matchCat && matchQ;
+      });
+      document.getElementById('catalog-count').textContent = filtered.length + ' Games Available';
+      grid.innerHTML = filtered.map(g => {
+        const info = classifyGame(g);
+        return `
+          <article class="app-item">
+            <div class="app-item-top">
+              <img src="img/${g.id}_s.png" alt="${g.name}" class="app-item-icon" loading="lazy" width="56" height="56" onerror="this.src='img/1_s.png'">
+              <div class="app-item-name">${g.name}</div>
+            </div>
+            <div class="app-item-actions">
+              <button type="button" class="app-action-link play-web" data-launch="${info.webGame}">▶ Web Play</button>
+              <a href="https://play.google.com/store/apps/details?id=${g.pkg_name}" target="_blank" rel="noopener" class="app-action-link">Google Play</a>
+            </div>
+          </article>
+        `;
+      }).join('');
+
+      grid.querySelectorAll('[data-launch]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          switchGame(btn.dataset.launch);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      });
+    }
+
+    fetch('cfg/more_game.json')
+      .then(r => r.json())
+      .then(data => {
+        allGames = data;
+        renderCatalog();
+      })
+      .catch(() => {});
+
+    document.getElementById('catalog-search').addEventListener('input', renderCatalog);
+    document.querySelectorAll('.filter-pill').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-pill').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeCat = btn.dataset.cat;
+        renderCatalog();
+      });
+    });
+  </script>
+</body>
+</html>
