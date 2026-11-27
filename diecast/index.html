@@ -448,6 +448,73 @@
       margin: 0 auto 24px;
     }
 
+    /* Holiday Gift Guide */
+    .holiday-section {
+      padding: 56px 0 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .gift-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .gift-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .gift-card:hover {
+      border-color: var(--primary-gold);
+      transform: translateY(-3px);
+    }
+    .gift-budget {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--primary-gold);
+      margin-bottom: 4px;
+    }
+    .gift-who {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+    }
+    .gift-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+      margin-bottom: 14px;
+    }
+    .gift-card ul {
+      list-style: none;
+      font-size: 0.86rem;
+      color: #cbd5e1;
+      margin-bottom: 20px;
+    }
+    .gift-card li {
+      padding: 6px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .gift-tips {
+      margin-top: 24px;
+      background: rgba(56, 189, 248, 0.06);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      border-radius: 10px;
+      padding: 16px 20px;
+      font-size: 0.86rem;
+      color: #cbd5e1;
+      line-height: 1.6;
+    }
+    .gift-tips strong { color: #fff; }
+
     /* FAQ */
     .faq-grid {
       display: grid;
@@ -521,6 +588,7 @@
       .scales-grid { grid-template-columns: 1fr; }
       .stats-bar { grid-template-columns: 1fr 1fr; }
       .features-grid { grid-template-columns: 1fr; }
+      .gift-grid { grid-template-columns: 1fr; }
       .faq-grid { grid-template-columns: 1fr; }
       .nav-links { display: none; }
       .hero-cta-box { flex-direction: column; text-align: center; }
@@ -532,7 +600,7 @@
 
   <!-- Top Announcement -->
   <div class="top-announcement">
-    📢 <span>Collector Alert 2026:</span> Over 50,000+ authentic models in stock • Direct factory-sealed packaging & 24hr US dispatch
+    🎄 <span>Holiday Gift Guide 2026:</span> Diecast gift picks by budget for Black Friday, Cyber Monday & Christmas • <a href="#gifts" style="text-decoration:underline;">See the picks ↓</a>
   </div>
 
   <!-- Navbar -->
@@ -596,6 +664,69 @@
       </div>
     </div>
   </header>
+
+  <!-- Holiday Gift Guide (Black Friday / Cyber Monday / Christmas 2026) -->
+  <section id="gifts" class="holiday-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Holiday Gift Guide 2026</span>
+        <h2>Diecast Gifts by Budget</h2>
+        <p>Shopping for a car fan this Black Friday or Christmas? Pick a budget, then pick a scale. Price ranges below are what we saw on the store on Nov 27, 2026 and may change.</p>
+      </div>
+
+      <div class="gift-grid">
+        <div class="gift-card">
+          <div>
+            <div class="gift-budget">Under $35</div>
+            <div class="gift-who">Stocking stuffers & new collectors</div>
+            <p>1:64 scale cars are about 3 inches long, cheap enough to buy a few, and easy to display on a desk or shelf.</p>
+            <ul>
+              <li>🏁 1:64 race and tuner cars by Paragon, Inno Models and Model Model: about $21–$31</li>
+              <li>🎁 Good for: kids 8+, office gifts, Secret Santa</li>
+            </ul>
+          </div>
+          <a href="https://www.tkqlhce.com/click-101878805-10575896-1689900394000?sid=diecast_gift_under35&url=https%3A%2F%2Fwww.diecastmodelswholesale.com%2Fsale%2F" target="_blank" rel="nofollow sponsored" class="btn-scale-action" onclick="gtag('event', 'outbound_click', {'event_category': 'affiliate', 'event_label': 'gift_under35'});">
+            Shop Sale Models ➔
+          </a>
+        </div>
+
+        <div class="gift-card">
+          <div>
+            <div class="gift-budget">$60 – $150</div>
+            <div class="gift-who">The classic car lover</div>
+            <p>A 1:18 model is about 10 inches long, with opening doors and hood. This is the "real present" range for dads, granddads and car-club friends.</p>
+            <ul>
+              <li>🚗 1:18 American classics by ERTL Authentics: from about $70</li>
+              <li>🇪🇺 1:18 European classics by Norev (Volvo, Porsche, Corvette): about $90–$135</li>
+            </ul>
+          </div>
+          <a href="https://www.tkqlhce.com/click-101878805-10575896-1689900394000?sid=diecast_gift_60_150&url=https%3A%2F%2Fwww.diecastmodelswholesale.com%2Fgift-ideas%2F" target="_blank" rel="nofollow sponsored" class="btn-scale-action" onclick="gtag('event', 'outbound_click', {'event_category': 'affiliate', 'event_label': 'gift_60_150'});">
+            Browse Gift Ideas ➔
+          </a>
+        </div>
+
+        <div class="gift-card">
+          <div>
+            <div class="gift-budget">$150+</div>
+            <div class="gift-who">Serious collectors</div>
+            <p>High-detail premium brands and limited runs. Check the edition size on the product page: numbered pieces sell out.</p>
+            <ul>
+              <li>🏆 AutoArt 1:18 models: from about $160</li>
+              <li>🔢 Limited editions such as ACME 1:18 (some limited to a few hundred pieces)</li>
+            </ul>
+          </div>
+          <a href="https://www.tkqlhce.com/click-101878805-10575896-1689900394000?sid=diecast_gift_150plus&url=https%3A%2F%2Fwww.diecastmodelswholesale.com%2Flimited-edition%2F" target="_blank" rel="nofollow sponsored" class="btn-scale-action" onclick="gtag('event', 'outbound_click', {'event_category': 'affiliate', 'event_label': 'gift_150plus'});">
+            Shop Limited Editions ➔
+          </a>
+        </div>
+      </div>
+
+      <div class="gift-tips">
+        <strong>Before you order a gift:</strong> many listings are marked "Future Release" (pre-order), so they won't arrive by Christmas. Pick in-stock models, and check the store's shipping page for holiday delivery times.
+        <br><strong>Disclosure:</strong> links in this guide are affiliate links. If you buy, we may earn a commission at no extra cost to you.
+      </div>
+    </div>
+  </section>
 
   <!-- Scales Showcase Section -->
   <section id="scales" class="section-padding">
